@@ -1,8 +1,8 @@
-extends Player
+extends AnimatedSprite2D
 
 
 func _ready():
-	pass
+	print("[Archer] ready")
 
 
 func _process(_delta):

@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b62fj017llivr" path="res://assets/PCs/td_monsters_archer_u1.png" id="7_i3a3s"]
 [ext_resource type="Texture2D" uid="uid://dxrx8srkyyoip" path="res://assets/PCs/td_monsters_archer_u2.png" id="8_njxnq"]
 [ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://components/MovementComponent.tscn" id="9_26but"]
+[ext_resource type="Script" path="res://players/Archer.gd" id="9_gxuwj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j72el"]
 animations = [{
@@ -57,26 +58,12 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_d2pwe"]
-script/source = "extends AnimatedSprite2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
-
 [node name="Archer" type="AnimatedSprite2D"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_j72el")
 animation = &"walk_right"
 autoplay = "walk_right"
-script = SubResource("GDScript_d2pwe")
+script = ExtResource("9_gxuwj")
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_26but")]
 player = NodePath("..")
