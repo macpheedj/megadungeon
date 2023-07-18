@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://dkp71whytt1rk"]
+
+[ext_resource type="Texture2D" uid="uid://dp4kwd4ajmhgc" path="res://assets/PCs/td_monsters_fighter_d1.png" id="1_27im1"]
+[ext_resource type="Texture2D" uid="uid://dd1j5afwt1su0" path="res://assets/PCs/td_monsters_fighter_d2.png" id="2_tx6hc"]
+[ext_resource type="Texture2D" uid="uid://brofpskp488m3" path="res://assets/PCs/td_monsters_fighter_l1.png" id="3_3ywao"]
+[ext_resource type="Texture2D" uid="uid://dnfommmd3s7y6" path="res://assets/PCs/td_monsters_fighter_l2.png" id="4_7s6di"]
+[ext_resource type="Texture2D" uid="uid://bvwk3bli7alby" path="res://assets/PCs/td_monsters_fighter_r1.png" id="5_3k8ri"]
+[ext_resource type="Texture2D" uid="uid://cspfh2h5rehvw" path="res://assets/PCs/td_monsters_fighter_r2.png" id="6_2tya0"]
+[ext_resource type="Texture2D" uid="uid://yr0ye6u8u770" path="res://assets/PCs/td_monsters_fighter_u1.png" id="7_bhj8x"]
+[ext_resource type="Texture2D" uid="uid://bvbqkmbkuifep" path="res://assets/PCs/td_monsters_fighter_u2.png" id="8_o7rcq"]
+[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://components/MovementComponent.tscn" id="9_s2fct"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ef24j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_27im1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tx6hc")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3ywao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7s6di")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3k8ri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2tya0")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_bhj8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_o7rcq")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 2.0
+}]
+
+[node name="Fighter" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ef24j")
+animation = &"walk_right"
+autoplay = "walk_right"
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_s2fct")]
+player = NodePath("..")

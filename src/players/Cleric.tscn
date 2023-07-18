@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://d3cvyu2u3h8fc"]
+
+[ext_resource type="Texture2D" uid="uid://biq4jwd1vkk3o" path="res://assets/PCs/td_monsters_cleric_d1.png" id="1_t4tc5"]
+[ext_resource type="Texture2D" uid="uid://c63xqvas6kcbk" path="res://assets/PCs/td_monsters_cleric_d2.png" id="2_6k8ip"]
+[ext_resource type="Texture2D" uid="uid://dmyhenhvm1pxf" path="res://assets/PCs/td_monsters_cleric_l1.png" id="3_y6462"]
+[ext_resource type="Texture2D" uid="uid://byq5vb3qupt5h" path="res://assets/PCs/td_monsters_cleric_l2.png" id="4_7qnot"]
+[ext_resource type="Texture2D" uid="uid://cdhtrv42wbai8" path="res://assets/PCs/td_monsters_cleric_r1.png" id="5_rtvid"]
+[ext_resource type="Texture2D" uid="uid://doe2i63cdn2jv" path="res://assets/PCs/td_monsters_cleric_r2.png" id="6_1xik5"]
+[ext_resource type="Texture2D" uid="uid://816h7t5w1f1l" path="res://assets/PCs/td_monsters_cleric_u1.png" id="7_ndste"]
+[ext_resource type="Texture2D" uid="uid://b7vo2qq8hqwrr" path="res://assets/PCs/td_monsters_cleric_u2.png" id="8_7k80j"]
+[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://components/MovementComponent.tscn" id="9_dd6xy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ej7i7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_t4tc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6k8ip")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_y6462")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7qnot")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_rtvid")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1xik5")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ndste")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7k80j")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 2.0
+}]
+
+[node name="Cleric" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ej7i7")
+animation = &"walk_right"
+autoplay = "walk_right"
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_dd6xy")]
+player = NodePath("..")
