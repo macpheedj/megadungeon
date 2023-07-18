@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://h4j4rj41ae1m"]
+[gd_scene load_steps=12 format=3 uid="uid://h4j4rj41ae1m"]
 
 [ext_resource type="Texture2D" uid="uid://ds7dggv8vonum" path="res://assets/PCs/td_monsters_wizard_d1.png" id="1_j43hp"]
 [ext_resource type="Texture2D" uid="uid://ctfvrecvxi8k1" path="res://assets/PCs/td_monsters_wizard_d2.png" id="2_85bix"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dc3seig01ujag" path="res://assets/PCs/td_monsters_wizard_r2.png" id="6_fc6os"]
 [ext_resource type="Texture2D" uid="uid://cqsvh0a1s2cqp" path="res://assets/PCs/td_monsters_wizard_u1.png" id="7_bhigo"]
 [ext_resource type="Texture2D" uid="uid://dahfb4eeypvr8" path="res://assets/PCs/td_monsters_wizard_u2.png" id="8_cblvn"]
+[ext_resource type="Script" path="res://players/Wizard.gd" id="9_epu73"]
 [ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://components/MovementComponent.tscn" id="9_qy2cl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u7p2c"]
@@ -62,6 +63,7 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_u7p2c")
 animation = &"walk_right"
 autoplay = "walk_right"
+script = ExtResource("9_epu73")
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_qy2cl")]
 player = NodePath("..")
