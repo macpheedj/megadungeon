@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://d3cvyu2u3h8fc"]
+
+[ext_resource type="Texture2D" uid="uid://biq4jwd1vkk3o" path="res://assets/PCs/td_monsters_cleric_d1.png" id="1_h8wx6"]
+[ext_resource type="Texture2D" uid="uid://c63xqvas6kcbk" path="res://assets/PCs/td_monsters_cleric_d2.png" id="2_tarbt"]
+[ext_resource type="Texture2D" uid="uid://dmyhenhvm1pxf" path="res://assets/PCs/td_monsters_cleric_l1.png" id="3_00ccl"]
+[ext_resource type="Texture2D" uid="uid://byq5vb3qupt5h" path="res://assets/PCs/td_monsters_cleric_l2.png" id="4_b154n"]
+[ext_resource type="Texture2D" uid="uid://cdhtrv42wbai8" path="res://assets/PCs/td_monsters_cleric_r1.png" id="5_q5f5r"]
+[ext_resource type="Texture2D" uid="uid://doe2i63cdn2jv" path="res://assets/PCs/td_monsters_cleric_r2.png" id="6_bfpht"]
+[ext_resource type="Texture2D" uid="uid://816h7t5w1f1l" path="res://assets/PCs/td_monsters_cleric_u1.png" id="7_ihg6a"]
+[ext_resource type="Texture2D" uid="uid://b7vo2qq8hqwrr" path="res://assets/PCs/td_monsters_cleric_u2.png" id="8_2rdhs"]
+[ext_resource type="Script" path="res://entities/players/Cleric.gd" id="9_tepfu"]
+[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/MovementComponent.tscn" id="10_7fkye"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ej7i7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h8wx6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tarbt")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_00ccl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_b154n")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_q5f5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bfpht")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ihg6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2rdhs")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 2.0
+}]
+
+[node name="Cleric" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ej7i7")
+animation = &"walk_right"
+autoplay = "walk_right"
+script = ExtResource("9_tepfu")
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_7fkye")]
+player = NodePath("..")

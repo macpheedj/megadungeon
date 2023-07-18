@@ -1,4 +1,4 @@
-extends AnimatedSprite2D
+extends Player
 
 
 func _ready():

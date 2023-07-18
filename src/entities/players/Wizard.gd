@@ -1,8 +1,8 @@
-extends TileMap
+extends Player
 
 
 func _ready():
-	print("[Floor] ready")
+	print("[Wizard] ready")
 
 
 func _process(_delta):
