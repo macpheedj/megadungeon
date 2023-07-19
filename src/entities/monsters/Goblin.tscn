@@ -58,6 +58,7 @@ animations = [{
 }]
 
 [node name="Goblin" type="AnimatedSprite2D"]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_rd0ty")
 animation = &"walk_left"
 autoplay = "walk_left"

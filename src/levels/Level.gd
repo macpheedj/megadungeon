@@ -2,16 +2,16 @@ extends Node
 
 
 func _ready():
-	pass
+	randomize()
 
 
 func _process(_delta):
 	pass
 
 
-func _on_combatants_loaded_combatants(loaded_players, loaded_enemies):
-	for player in loaded_players:
-		$Map.add_child.call_deferred(player)
+func _on_combatants_loaded_combatants():
+	for combatant in $Combatants.combatants:
+		$Map.add_child.call_deferred(combatant)
 	
-	for enemy in loaded_enemies:
-		$Map.add_child.call_deferred(enemy)
+	# $Combatants.beginInitiative()
+

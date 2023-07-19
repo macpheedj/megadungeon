@@ -3,13 +3,19 @@ extends Node
 signal loaded_combatants
 
 
+var players: Array[Entity] = []
+var enemies: Array[Entity] = []
+var combatants: Array[Entity] = []
+var initiative_index = 0
+
+
 func _ready():
 	var save_data = getSaveData()
-	var players = loadPlayers(save_data.players)
-	var enemies = loadEnemies(save_data.enemies)
-	# establish initiative order
-	# begin turns
-	loaded_combatants.emit(players, enemies)
+	loadPlayers(save_data.players)
+	loadEnemies(save_data.enemies)
+	rollInitiative()
+
+	loaded_combatants.emit()
 
 
 func getSaveData():
@@ -27,8 +33,7 @@ func loadPlayers(player_data):
 		Vector2(24, 40),
 		Vector2(40, 40),
 	]
-	var players = loadEntities(player_data, positions)
-	return players
+	players = loadEntities(player_data, positions)
 
 
 func loadEnemies(enemy_data):
@@ -38,12 +43,11 @@ func loadEnemies(enemy_data):
 		Vector2(24 * 3, 40 * 3),
 		Vector2(40 * 3, 40 * 3),
 	]
-	var enemies = loadEntities(enemy_data, positions)
-	return enemies
+	enemies = loadEntities(enemy_data, positions)
 
 
 func loadEntities(entity_data, positions):
-	var entities = []
+	var entities: Array[Entity] = []
 
 	for i in entity_data.size():
 		var data = entity_data[i]
@@ -58,6 +62,17 @@ func loadEntities(entity_data, positions):
 		entities.push_back(entity)
 	
 	return entities
+
+
+func rollInitiative():
+	combatants = enemies.duplicate()
+	combatants.append_array(players.duplicate())
+
+	for combatant in combatants:
+		var initiative = randi_range(1, 20) + combatant.dexterity
+		combatant.initiative = initiative
+
+	combatants.sort_custom(func (a, b): return a.initiative >= b.initiative)
 
 
 func _process(_delta):

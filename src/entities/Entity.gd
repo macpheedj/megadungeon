@@ -35,6 +35,8 @@ class_name Entity
 @export var right_hand: String
 @export_group("")
 
+var initiative = 0
+
 func save():
     return {
         "filename": get_scene_file_path(),
@@ -57,4 +59,6 @@ func save():
         "intelligence": intelligence,
         "wisdom": wisdom,
         "charisma": charisma,
+
+        "initiative": initiative,
     }

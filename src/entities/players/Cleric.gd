@@ -2,7 +2,7 @@ extends Entity
 
 
 func _ready():
-	print("[Cleric] ready")
+	pass
 
 
 func _process(_delta):
