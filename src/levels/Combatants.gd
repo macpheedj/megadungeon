@@ -5,43 +5,60 @@ signal loaded_enemies
 
 
 func _ready():
-	loadPlayers()
+	var save_data = getSaveData()
+	loadPlayers(save_data.players)
+	loadEnemies(save_data.enemies)
 	# establish initiative order
 	# begin turns
 	pass
 
 
 func getSaveData():
-	var file = FileAccess.open("res://tests/test_party.json", FileAccess.READ)
+	var file = FileAccess.open("res://tests/test_level.json", FileAccess.READ)
 	var data = file.get_as_text()
 	var json = JSON.new()
 	json.parse(data)
 	return json.get_data()
 
 
-func loadPlayers():
-	var players = []
+func loadPlayers(player_data):
 	var positions = [
 		Vector2(24, 24),
 		Vector2(40, 24),
 		Vector2(24, 40),
 		Vector2(40, 40),
 	]
-	var save_data = getSaveData()
+	var players = loadEntities(player_data, positions)
+	loaded_players.emit(players)
 
-	for i in save_data.size():
-		var player_data = save_data[i]
-		var player = load(player_data.filename).instantiate()
-		player.position = positions[i]
 
-		for key in player_data.keys():
+func loadEnemies(enemy_data):
+	var positions = [
+		Vector2(24 * 3, 24 * 3),
+		Vector2(40 * 3, 24 * 3),
+		Vector2(24 * 3, 40 * 3),
+		Vector2(40 * 3, 40 * 3),
+	]
+	var enemies = loadEntities(enemy_data, positions)
+	loaded_enemies.emit(enemies)
+
+
+func loadEntities(entity_data, positions):
+	var entities = []
+
+	for i in entity_data.size():
+		var data = entity_data[i]
+		var entity = load(data.filename).instantiate()
+		entity.position = positions[i]
+
+		for key in data.keys():
 			if ["filename", "position_x", "position_y"].has(key):
 				continue
-			player.set(key, player_data[key])
+			entity.set(key, data[key])
 		
-		players.push_back(player)
+		entities.push_back(entity)
 	
-	loaded_players.emit(players)
+	return entities
 
 
 func _process(_delta):
