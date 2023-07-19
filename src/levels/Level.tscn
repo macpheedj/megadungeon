@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl7qg2ycyon50"]
+[gd_scene load_steps=6 format=3 uid="uid://cl7qg2ycyon50"]
 
 [ext_resource type="Texture2D" uid="uid://co6fjakqtftao" path="res://assets/tiny_dungeon_world.png" id="1_5rcra"]
+[ext_resource type="Script" path="res://levels/Level.gd" id="1_vc0fk"]
 [ext_resource type="Script" path="res://levels/Combatants.gd" id="2_0q4m8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wm4f5"]
@@ -313,6 +314,7 @@ texture = ExtResource("1_5rcra")
 sources/0 = SubResource("TileSetAtlasSource_wm4f5")
 
 [node name="Level" type="Node"]
+script = ExtResource("1_vc0fk")
 
 [node name="Map" type="TileMap" parent="."]
 texture_filter = 1
@@ -327,3 +329,6 @@ limit_top = 0
 
 [node name="Combatants" type="Node" parent="."]
 script = ExtResource("2_0q4m8")
+
+[connection signal="loaded_enemies" from="Combatants" to="." method="_on_combatants_loaded_enemies"]
+[connection signal="loaded_players" from="Combatants" to="." method="_on_combatants_loaded_players"]

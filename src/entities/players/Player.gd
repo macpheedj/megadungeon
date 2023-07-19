@@ -5,7 +5,6 @@ class_name Player
 @export var is_active = false
 
 @export_group("Main")
-@export_enum("WARRIOR", "WIZARD") var character_class: String
 @export var level: int = 1
 @export var xp: int = 0
 @export_enum("LAWFUL", "NEUTRAL", "CHAOTIC") var alignment: String
@@ -36,32 +35,9 @@ class_name Player
 @export var right_hand: String
 @export_group("")
 
-func _init(player):
-    character_class = player.character_class
-    level = player.level || 1
-    xp = player.xp || 0
-
-    strength = player.strength || 0
-    dexterity = player.dexterity || 0
-    constitution = player.constitution || 0
-    intelligence = player.intelligence || 0
-    wisdom = player.wisdom || 0
-    charisma = player.charisma || 0
-
-    health = player.health || constitution
-    health_max = player.health_max || health
-    defense = player.defense || 0
-    defense_max = player.defense_max || defense
-    block = player.block || 0.0
-    dodge = player.dodge || 0.0
-    movespeed = player.movespeed || 4
-
-    if player.position_x && player.position_y:
-        position = Vector2(player.position_x, player.position_y)
-
 func save():
     return {
-        "character_class": character_class,
+        "filename": get_scene_file_path(),
         "level": level,
         "xp": xp,
         "position_x": position.x,
