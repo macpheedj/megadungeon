@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cyf8et0xfuada"]
+[gd_scene load_steps=11 format=3 uid="uid://cyf8et0xfuada"]
 
 [ext_resource type="Texture2D" uid="uid://dleywfvhj4nff" path="res://assets/monsters/td_monsters_goblin_grunt_d1.png" id="1_l5k38"]
 [ext_resource type="Texture2D" uid="uid://c8dgxj1yxyiko" path="res://assets/monsters/td_monsters_goblin_grunt_d2.png" id="2_a6asr"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dum1d0k4lqe3d" path="res://assets/monsters/td_monsters_goblin_grunt_r2.png" id="6_lklvy"]
 [ext_resource type="Texture2D" uid="uid://bofuvhiha5mgt" path="res://assets/monsters/td_monsters_goblin_grunt_u1.png" id="7_jqpyf"]
 [ext_resource type="Texture2D" uid="uid://dk4rle61mp18h" path="res://assets/monsters/td_monsters_goblin_grunt_u2.png" id="8_u0ki8"]
+[ext_resource type="Script" path="res://entities/monsters/Goblin.gd" id="9_er71m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rd0ty"]
 animations = [{
@@ -60,3 +61,4 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_rd0ty")
 animation = &"walk_left"
 autoplay = "walk_left"
+script = ExtResource("9_er71m")

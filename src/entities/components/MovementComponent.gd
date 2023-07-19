@@ -1,7 +1,7 @@
 extends Node
 
 
-@export var player: Player
+@export var player: Entity
 var size = 16
 
 

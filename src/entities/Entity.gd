@@ -1,5 +1,5 @@
 extends AnimatedSprite2D
-class_name Player
+class_name Entity
 
 
 @export var is_active = false
