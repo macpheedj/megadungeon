@@ -330,5 +330,4 @@ limit_top = 0
 [node name="Combatants" type="Node" parent="."]
 script = ExtResource("2_0q4m8")
 
-[connection signal="loaded_enemies" from="Combatants" to="." method="_on_combatants_loaded_enemies"]
-[connection signal="loaded_players" from="Combatants" to="." method="_on_combatants_loaded_players"]
+[connection signal="loaded_combatants" from="Combatants" to="." method="_on_combatants_loaded_combatants"]

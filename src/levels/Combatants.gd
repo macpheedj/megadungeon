@@ -1,16 +1,15 @@
 extends Node
 
-signal loaded_players
-signal loaded_enemies
+signal loaded_combatants
 
 
 func _ready():
 	var save_data = getSaveData()
-	loadPlayers(save_data.players)
-	loadEnemies(save_data.enemies)
+	var players = loadPlayers(save_data.players)
+	var enemies = loadEnemies(save_data.enemies)
 	# establish initiative order
 	# begin turns
-	pass
+	loaded_combatants.emit(players, enemies)
 
 
 func getSaveData():
@@ -29,7 +28,7 @@ func loadPlayers(player_data):
 		Vector2(40, 40),
 	]
 	var players = loadEntities(player_data, positions)
-	loaded_players.emit(players)
+	return players
 
 
 func loadEnemies(enemy_data):
@@ -40,7 +39,7 @@ func loadEnemies(enemy_data):
 		Vector2(40 * 3, 40 * 3),
 	]
 	var enemies = loadEntities(enemy_data, positions)
-	loaded_enemies.emit(enemies)
+	return enemies
 
 
 func loadEntities(entity_data, positions):
