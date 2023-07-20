@@ -9,7 +9,7 @@ var combatants: Array[Entity] = []
 var initiative_index = 0
 
 
-func _ready():
+func setupCombatants():
 	var save_data = getSaveData()
 	loadPlayers(save_data.players)
 	loadEnemies(save_data.enemies)
@@ -74,6 +74,19 @@ func rollInitiative():
 
 	combatants.sort_custom(func (a, b): return a.initiative >= b.initiative)
 
+
+func isPlayerDefeat():
+	var total_hp = players.reduce(func (sum, player): return sum + player.health, 0)
+	return total_hp == 0
+
+
+func isPlayerVictory():
+	var total_hp = enemies.reduce(func (sum, enemy): return sum + enemy.health, 0)
+	return total_hp == 0
+
+
+func countLivingCombatants():
+	return combatants.reduce(func (sum, combatant): if combatant.health > 0: return sum + 1 else: return sum, 0)
 
 func _process(_delta):
 	pass

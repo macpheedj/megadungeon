@@ -21,13 +21,25 @@
     ],
     "enemies": [
         {
-            "filename": "res://entities/monsters/Goblin.tscn"
+            "filename": "res://entities/monsters/Goblin.tscn",
+            "health": 1,
+            "health_max": 1,
+            "defense": 10,
+            "defense_max": 10
         },
         {
-            "filename": "res://entities/monsters/Goblin.tscn"
+            "filename": "res://entities/monsters/Goblin.tscn",
+            "health": 1,
+            "health_max": 1,
+            "defense": 10,
+            "defense_max": 10
         },
         {
-            "filename": "res://entities/monsters/Goblin.tscn"
+            "filename": "res://entities/monsters/Goblin.tscn",
+            "health": 1,
+            "health_max": 1,
+            "defense": 10,
+            "defense_max": 10
         }
     ]
 }
