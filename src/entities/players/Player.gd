@@ -2,16 +2,22 @@ extends Entity
 class_name Player
 
 
-var STATES = {
-    ADVENTURING = "ADVENTURING",
-    STANDING_BY = "STANDING_BY",
-    TAKING_TURN = "TAKING_TURN",
+enum State {
+    Adventuring,
+    StandingBy,
+    TakingTurn,
 }
-var state = STATES.ADVENTURING
+var state: State = State.Adventuring
 
 
-func set_state(new_state):
-    print("[%s] setting state: %s" % [name, new_state])
-    if new_state in STATES:
-        state = new_state
+func set_state(new_state: State):
+    print("[%s] setting state: %s" % [name, State.keys()[new_state]])
+    if not new_state is State:
+        print("%s is not a State" % State.keys()[new_state])
+        return
 
+    state = new_state
+
+func perform_action(action_index: int):
+    print("perform_action called on base class: %s" % str(action_index))
+    pass

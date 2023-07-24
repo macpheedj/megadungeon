@@ -39,7 +39,7 @@ func _process(_delta):
 
 		States.StartingTurn:
 			var actor = $Combatants.combatants[turn_index]
-			actor.set_state(actor.STATES.TAKING_TURN)
+			actor.set_state(actor.State.TakingTurn)
 			setState(States.Waiting)
 
 		States.EndingTurn:

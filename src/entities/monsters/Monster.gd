@@ -2,14 +2,17 @@ extends Entity
 class_name Monster
 
 
-var STATES = {
-    STANDING_BY = "STANDING_BY",
-    TAKING_TURN = "TAKING_TURN",
+enum State {
+    StandingBy,
+    TakingTurn,
 }
-var state = STATES.STANDING_BY
+var state: State = State.StandingBy
 
 
-func set_state(new_state):
-    print("[%s] setting state: %s" % [name, new_state])
-    if new_state in STATES:
-        state = new_state
+func set_state(new_state: State):
+    print("[%s] setting state: %s" % [name, State.keys()[new_state]])
+    if not new_state is State:
+        print("%s is not a State" % State.keys()[new_state])
+        return
+
+    state = new_state
