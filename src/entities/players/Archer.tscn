@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dh8ig6cg2kb3o" path="res://assets/PCs/td_monsters_archer_r2.png" id="6_hswiv"]
 [ext_resource type="Texture2D" uid="uid://b62fj017llivr" path="res://assets/PCs/td_monsters_archer_u1.png" id="7_i3a3s"]
 [ext_resource type="Texture2D" uid="uid://dxrx8srkyyoip" path="res://assets/PCs/td_monsters_archer_u2.png" id="8_njxnq"]
-[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/MovementComponent.tscn" id="9_26but"]
+[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/InputComponent.tscn" id="9_26but"]
 [ext_resource type="Script" path="res://entities/players/Archer.gd" id="9_gxuwj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j72el"]

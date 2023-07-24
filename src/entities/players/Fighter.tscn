@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://yr0ye6u8u770" path="res://assets/PCs/td_monsters_fighter_u1.png" id="7_il4ec"]
 [ext_resource type="Texture2D" uid="uid://bvbqkmbkuifep" path="res://assets/PCs/td_monsters_fighter_u2.png" id="8_dkoe8"]
 [ext_resource type="Script" path="res://entities/players/Fighter.gd" id="9_rjnjk"]
-[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/MovementComponent.tscn" id="10_a7dmj"]
+[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/InputComponent.tscn" id="10_a7dmj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ef24j"]
 animations = [{

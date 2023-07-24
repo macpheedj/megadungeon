@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cqsvh0a1s2cqp" path="res://assets/PCs/td_monsters_wizard_u1.png" id="7_8unru"]
 [ext_resource type="Texture2D" uid="uid://dahfb4eeypvr8" path="res://assets/PCs/td_monsters_wizard_u2.png" id="8_53eq2"]
 [ext_resource type="Script" path="res://entities/players/Wizard.gd" id="9_8mn1c"]
-[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/MovementComponent.tscn" id="10_bktph"]
+[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/InputComponent.tscn" id="10_bktph"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u7p2c"]
 animations = [{

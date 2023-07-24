@@ -7,6 +7,9 @@ var size = 16
 
 func _process(_delta):
 	match player.state:
+		player.State.StandingBy:
+			return
+
 		player.State.Adventuring:
 			handle_adventuring_movement()
 		
