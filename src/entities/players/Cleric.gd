@@ -1,4 +1,4 @@
-extends Entity
+extends Player
 
 
 func _ready():

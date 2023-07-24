@@ -1,4 +1,4 @@
-extends Entity
+extends Monster
 
 
 func _ready():

@@ -39,8 +39,7 @@ func _process(_delta):
 
 		States.StartingTurn:
 			var actor = $Combatants.combatants[turn_index]
-			actor.is_active = true
-			print(actor.name)
+			actor.set_state(actor.STATES.TAKING_TURN)
 			setState(States.Waiting)
 
 		States.EndingTurn:
