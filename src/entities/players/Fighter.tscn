@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkp71whytt1rk"]
+[gd_scene load_steps=14 format=3 uid="uid://dkp71whytt1rk"]
 
 [ext_resource type="Texture2D" uid="uid://dp4kwd4ajmhgc" path="res://assets/PCs/td_monsters_fighter_d1.png" id="1_pd8ex"]
 [ext_resource type="Texture2D" uid="uid://dd1j5afwt1su0" path="res://assets/PCs/td_monsters_fighter_d2.png" id="2_o6bt2"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bvbqkmbkuifep" path="res://assets/PCs/td_monsters_fighter_u2.png" id="8_dkoe8"]
 [ext_resource type="Script" path="res://entities/players/Fighter.gd" id="9_rjnjk"]
 [ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/InputComponent.tscn" id="10_a7dmj"]
+[ext_resource type="Resource" uid="uid://bd3ywr1p4vyw5" path="res://resources/Move.tres" id="10_wkoeo"]
+[ext_resource type="Resource" uid="uid://bs2mvlduo8ouq" path="res://resources/Attack.tres" id="11_tf8kk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ef24j"]
 animations = [{
@@ -64,6 +66,8 @@ sprite_frames = SubResource("SpriteFrames_ef24j")
 animation = &"walk_right"
 autoplay = "walk_right"
 script = ExtResource("9_rjnjk")
+action_1 = ExtResource("10_wkoeo")
+action_2 = ExtResource("11_tf8kk")
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_a7dmj")]
 player = NodePath("..")

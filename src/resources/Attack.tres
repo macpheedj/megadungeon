@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Action" load_steps=2 format=3 uid="uid://bs2mvlduo8ouq"]
+
+[ext_resource type="Script" path="res://resources/Action.gd" id="1_ome2y"]
+
+[resource]
+script = ExtResource("1_ome2y")
+action_name = "Attack"
+action_type = 1
+min_range = 1
+max_range = 1
+damage_type = 1
+damage_range = 6
+damage_bonus = 0
+attack_bonus = 0

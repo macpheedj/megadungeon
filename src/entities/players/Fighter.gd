@@ -2,7 +2,7 @@ extends Player
 
 
 func _ready():
-	pass
+	super()
 
 
 func _process(_delta):
