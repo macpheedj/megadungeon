@@ -18,6 +18,7 @@ func set_state(new_state: State):
 
     state = new_state
 
+
 func perform_action(action_index: int):
     print("perform_action called on base class: %s" % str(action_index))
     pass

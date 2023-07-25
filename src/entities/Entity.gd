@@ -2,6 +2,8 @@ extends AnimatedSprite2D
 class_name Entity
 
 
+var Action = preload("res://resources/Action.gd")
+
 @export var is_active = false
 
 @export_group("Main")
@@ -35,7 +37,14 @@ class_name Entity
 @export var right_hand: String
 @export_group("")
 
+@export var actions: Array[Action] = []
+
 var initiative = 0
+
+
+func _ready():
+    pass
+
 
 func save():
     return {
