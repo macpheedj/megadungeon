@@ -2,8 +2,6 @@ extends AnimatedSprite2D
 class_name Entity
 
 
-var Action = preload("res://resources/Action.gd")
-
 @export_group("Main")
 @export var level: int = 1
 @export var xp: int = 0
@@ -34,39 +32,13 @@ var Action = preload("res://resources/Action.gd")
 @export var weapon: String
 @export var off_hand: String
 
-@export_group("Actions")
-@export var action_1: Action
-@export var action_2: Action
-@export var action_3: Action
-@export var action_4: Action
-@export var action_5: Action
-@export var action_6: Action
-@export var action_7: Action
-@export var action_8: Action
-
 
 var is_active = false
 var initiative = 0
 
 
 func _ready():
-    setup_actions()
-
-
-func setup_actions():
-    var actions = [
-        action_1,
-        action_2,
-        action_3,
-        action_4,
-        action_5,
-        action_6,
-        action_7,
-        action_8,
-    ]
-    for action in actions:
-        if action:
-            action.inject(self)
+    pass
 
 
 func save():

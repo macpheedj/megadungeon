@@ -9,8 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bofuvhiha5mgt" path="res://assets/monsters/td_monsters_goblin_grunt_u1.png" id="7_jqpyf"]
 [ext_resource type="Texture2D" uid="uid://dk4rle61mp18h" path="res://assets/monsters/td_monsters_goblin_grunt_u2.png" id="8_u0ki8"]
 [ext_resource type="Script" path="res://entities/monsters/Goblin.gd" id="9_er71m"]
-[ext_resource type="Resource" uid="uid://bd3ywr1p4vyw5" path="res://resources/Move.tres" id="10_o54o1"]
-[ext_resource type="Resource" uid="uid://bs2mvlduo8ouq" path="res://resources/Attack.tres" id="11_of7vr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rd0ty"]
 animations = [{
@@ -65,5 +63,3 @@ sprite_frames = SubResource("SpriteFrames_rd0ty")
 animation = &"walk_left"
 autoplay = "walk_left"
 script = ExtResource("9_er71m")
-action_1 = ExtResource("10_o54o1")
-action_2 = ExtResource("11_of7vr")

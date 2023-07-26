@@ -65,5 +65,4 @@ animation = &"walk_right"
 autoplay = "walk_right"
 script = ExtResource("9_gxuwj")
 
-[node name="MovementComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_26but")]
-player = NodePath("..")
+[node name="MovementComponent" parent="." instance=ExtResource("9_26but")]
