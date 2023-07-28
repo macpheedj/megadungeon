@@ -1,4 +1,8 @@
 extends Node
+class_name ActionComponent
+
+
+signal entity_turn_ended
 
 
 enum State {
@@ -20,6 +24,8 @@ enum State {
 
 var action: Action
 var state: State
+var action_points := 2
+var actions_taken := 0
 
 
 func set_state(new_state: State):
@@ -35,10 +41,14 @@ func select_action(selected_action: Action):
 	if action:
 		action.on_exit()
 		action.back_pressed.disconnect(_on_back_pressed)
+		action.action_completed.disconnect(_on_action_completed)
+		action.action_state_changed.disconnect(_on_action_state_changed)
 
 	action = selected_action
 	action.on_enter(entity)
 	action.back_pressed.connect(_on_back_pressed)
+	action.action_completed.connect(_on_action_completed)
+	action.action_state_changed.connect(_on_action_state_changed)
 
 	set_state(State.Targeting)
 
@@ -72,7 +82,16 @@ func _on_action_state_changed(new_state: State):
 
 
 func _on_back_pressed():
-	print("back button pressed")
+	print("[%s] back button pressed" % name)
 	match state:
 		State.Targeting: set_state(State.Selecting)
 		State.Executing: set_state(State.Targeting)
+
+
+func _on_action_completed():
+	actions_taken += 1
+
+	if actions_taken >= action_points:
+		entity_turn_ended.emit()
+	else:
+		set_state(State.Selecting)

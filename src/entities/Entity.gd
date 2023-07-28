@@ -2,6 +2,16 @@ extends AnimatedSprite2D
 class_name Entity
 
 
+signal turn_ended
+
+
+enum State {
+    Adventuring,
+    StandingBy,
+    TakingTurn,
+}
+
+
 @export_group("Main")
 @export var level: int = 1
 @export var xp: int = 0
@@ -36,9 +46,16 @@ class_name Entity
 var is_active = false
 var initiative = 0
 
+var state: State = State.StandingBy
 
-func _ready():
-    pass
+
+func set_state(new_state: State):
+    print("[%s] setting state: %s" % [name, State.keys()[new_state]])
+    if not new_state is State:
+        print("%s is not a State" % State.keys()[new_state])
+        return
+
+    state = new_state
 
 
 func save():
@@ -66,3 +83,13 @@ func save():
 
         "initiative": initiative,
     }
+
+
+func _ready():
+    for component in get_children():
+        if component is ActionComponent:
+            component.entity_turn_ended.connect(_on_turn_ended)
+
+
+func _on_turn_ended():
+    turn_ended.emit()

@@ -16,6 +16,7 @@ var original_position: Vector2
 
 func on_enter(_entity: Entity):
     print("[MoveAction] on_enter")
+    print("[MoveAction %s] movespeed: %s" % [_entity.name, _entity.movespeed])
     entity = _entity
     max_range = _entity.movespeed
     move_remaining = _entity.movespeed
@@ -42,7 +43,10 @@ func handle_targeting():
         if Input.is_action_just_pressed("move_east"): attempt_move(EAST)
         if Input.is_action_just_pressed("move_west"): attempt_move(WEST)
     
-    if Input.is_action_just_pressed("back"):
+    if Input.is_action_just_pressed("ui_accept"):
+        action_state_changed.emit(ActionComponent.State.Executing)
+
+    if Input.is_action_just_pressed("ui_cancel"):
         if move_remaining < max_range:
             entity.position = original_position
             move_remaining = max_range
@@ -51,4 +55,5 @@ func handle_targeting():
 
 
 func handle_execution():
-    pass
+    # nothing to execute on a move action
+    action_completed.emit()

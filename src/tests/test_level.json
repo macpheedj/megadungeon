@@ -10,7 +10,7 @@
             "defense_max": 10,
             "block": 0.15,
             "dodge": 0.1,
-            "movespeed": 4,
+            "movespeed": 5,
             "strength": 1,
             "dexterity": 1,
             "constitution": 2,

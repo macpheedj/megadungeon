@@ -20,14 +20,14 @@ var turn_index := 0
 
 func _ready():
 	randomize()
-	setState(States.Initializing)
+	set_state(States.Initializing)
 
 
 func _process(_delta):
 	match state:
-		States.Waiting:
-			if Input.is_action_just_pressed("slam_space"):
-				setState(States.EndingTurn)
+		# States.Waiting:
+		# 	if Input.is_action_just_pressed("slam_space"):
+		# 		set_state(States.EndingTurn)
 
 		States.Initializing:
 			$Combatants.setupCombatants()
@@ -35,34 +35,34 @@ func _process(_delta):
 		States.StartingRound:
 			round_index += 1
 			turn_index = 0
-			setState(States.StartingTurn)
+			set_state(States.StartingTurn)
 
 		States.StartingTurn:
 			var actor = $Combatants.combatants[turn_index]
 			actor.set_state(actor.State.TakingTurn)
-			setState(States.Waiting)
+			set_state(States.Waiting)
 
 		States.EndingTurn:
 			turn_index += 1
 
 			if $Combatants.isPlayerVictory():
-				setState(States.Victory)
+				set_state(States.Victory)
 			elif $Combatants.isPlayerDefeat():
-				setState(States.Defeat)
+				set_state(States.Defeat)
 			elif turn_index < $Combatants.countLivingCombatants():
-				setState(States.StartingTurn)
+				set_state(States.StartingTurn)
 			else:
-				setState(States.EndingRound)
+				set_state(States.EndingRound)
 
 		States.EndingRound:
 			# TODO: resolve end-of-round effects?
 
 			if $Combatants.isPlayerVictory():
-				setState(States.Victory)
+				set_state(States.Victory)
 			elif $Combatants.isPlayerDefeat():
-				setState(States.Defeat)
+				set_state(States.Defeat)
 			else:
-				setState(States.StartingRound)
+				set_state(States.StartingRound)
 
 		States.Victory:
 			return
@@ -71,7 +71,7 @@ func _process(_delta):
 			return
 
 
-func setState(new_state: States):
+func set_state(new_state: States):
 	var code = "R" + str(round_index) + "T" + str(turn_index)
 	var args = [code, States.keys()[state], States.keys()[new_state]]
 	print("[%s] transitioning from '%s' to '%s'" % args)
@@ -80,7 +80,11 @@ func setState(new_state: States):
 
 func _on_combatants_loaded_combatants():
 	for combatant in $Combatants.combatants:
+		combatant.turn_ended.connect(_on_combatant_turn_ended)
 		$Map.add_child(combatant)
 	
-	setState(States.StartingRound)
+	set_state(States.StartingRound)
 
+
+func _on_combatant_turn_ended():
+	set_state(States.EndingTurn)

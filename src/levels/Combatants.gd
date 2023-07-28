@@ -69,7 +69,7 @@ func rollInitiative():
 	combatants.append_array(players.duplicate())
 
 	for combatant in combatants:
-		var initiative = randi_range(1, 20) + combatant.dexterity
+		var initiative = 10 # randi_range(1, 20) + combatant.dexterity
 		combatant.initiative = initiative
 
 	combatants.sort_custom(func (a, b): return a.initiative >= b.initiative)
