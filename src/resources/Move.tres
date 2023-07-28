@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MoveAction" load_steps=2 format=3 uid="uid://bhkrvm43vnfbf"]
+
+[ext_resource type="Script" path="res://resources/MoveAction.gd" id="1_sgshq"]
+
+[resource]
+script = ExtResource("1_sgshq")
+size = 16
+min_range = 1
+max_range = 1
+move_remaining = 0

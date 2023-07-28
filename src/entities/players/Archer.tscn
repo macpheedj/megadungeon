@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ci3q1h1aqi8ee"]
+[gd_scene load_steps=11 format=3 uid="uid://dg8run81slumb"]
 
 [ext_resource type="Texture2D" uid="uid://caf8w147dfngw" path="res://assets/PCs/td_monsters_archer_d1.png" id="1_mi00i"]
 [ext_resource type="Texture2D" uid="uid://jvn6thcc52ue" path="res://assets/PCs/td_monsters_archer_d2.png" id="2_myi8w"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dh8ig6cg2kb3o" path="res://assets/PCs/td_monsters_archer_r2.png" id="6_hswiv"]
 [ext_resource type="Texture2D" uid="uid://b62fj017llivr" path="res://assets/PCs/td_monsters_archer_u1.png" id="7_i3a3s"]
 [ext_resource type="Texture2D" uid="uid://dxrx8srkyyoip" path="res://assets/PCs/td_monsters_archer_u2.png" id="8_njxnq"]
-[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/InputComponent.tscn" id="9_26but"]
 [ext_resource type="Script" path="res://entities/players/Archer.gd" id="9_gxuwj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j72el"]
@@ -64,5 +63,3 @@ sprite_frames = SubResource("SpriteFrames_j72el")
 animation = &"walk_right"
 autoplay = "walk_right"
 script = ExtResource("9_gxuwj")
-
-[node name="MovementComponent" parent="." instance=ExtResource("9_26but")]

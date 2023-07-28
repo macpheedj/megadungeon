@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://h4j4rj41ae1m"]
+[gd_scene load_steps=11 format=3 uid="uid://h4j4rj41ae1m"]
 
 [ext_resource type="Texture2D" uid="uid://ds7dggv8vonum" path="res://assets/PCs/td_monsters_wizard_d1.png" id="1_7gpw8"]
 [ext_resource type="Texture2D" uid="uid://ctfvrecvxi8k1" path="res://assets/PCs/td_monsters_wizard_d2.png" id="2_gqe5h"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cqsvh0a1s2cqp" path="res://assets/PCs/td_monsters_wizard_u1.png" id="7_8unru"]
 [ext_resource type="Texture2D" uid="uid://dahfb4eeypvr8" path="res://assets/PCs/td_monsters_wizard_u2.png" id="8_53eq2"]
 [ext_resource type="Script" path="res://entities/players/Wizard.gd" id="9_8mn1c"]
-[ext_resource type="PackedScene" uid="uid://bfqxb8ncm8y7f" path="res://entities/components/InputComponent.tscn" id="10_bktph"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u7p2c"]
 animations = [{
@@ -64,6 +63,3 @@ sprite_frames = SubResource("SpriteFrames_u7p2c")
 animation = &"walk_right"
 autoplay = "walk_right"
 script = ExtResource("9_8mn1c")
-
-[node name="MovementComponent" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_bktph")]
-player = NodePath("..")

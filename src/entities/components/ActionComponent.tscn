@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dstssbu8r2maa"]
+
+[ext_resource type="Script" path="res://entities/components/ActionComponent.gd" id="1_dbbiu"]
+[ext_resource type="Resource" uid="uid://bhkrvm43vnfbf" path="res://resources/Move.tres" id="2_6nirn"]
+
+[node name="ActionComponent" type="Node"]
+script = ExtResource("1_dbbiu")
+action_1 = ExtResource("2_6nirn")

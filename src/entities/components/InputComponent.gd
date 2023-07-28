@@ -29,3 +29,7 @@ func handle_turn_taking():
 	if Input.is_action_just_pressed("action_bar_2"): player.perform_action(2)
 	if Input.is_action_just_pressed("action_bar_3"): player.perform_action(3)
 	if Input.is_action_just_pressed("action_bar_4"): player.perform_action(4)
+	if Input.is_action_just_pressed("action_bar_1"): player.perform_action(5)
+	if Input.is_action_just_pressed("action_bar_2"): player.perform_action(6)
+	if Input.is_action_just_pressed("action_bar_3"): player.perform_action(7)
+	if Input.is_action_just_pressed("action_bar_4"): player.perform_action(8)
