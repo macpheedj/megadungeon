@@ -66,7 +66,7 @@ func handle_selection_input():
 
 func _process(_delta):
 	if not entity.state == entity.State.TakingTurn:
-		pass
+		return
 	
 	match state:
 		State.Selecting:

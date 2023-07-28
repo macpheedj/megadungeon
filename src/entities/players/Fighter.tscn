@@ -64,7 +64,6 @@ sprite_frames = SubResource("SpriteFrames_ef24j")
 animation = &"walk_right"
 autoplay = "walk_right"
 script = ExtResource("9_rjnjk")
-movespeed = 5
 
 [node name="ActionComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("10_g6iq7")]
 entity = NodePath("..")

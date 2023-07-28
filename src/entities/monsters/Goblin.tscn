@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cyf8et0xfuada"]
+[gd_scene load_steps=11 format=3 uid="uid://cyf8et0xfuada"]
 
 [ext_resource type="Texture2D" uid="uid://dleywfvhj4nff" path="res://assets/monsters/td_monsters_goblin_grunt_d1.png" id="1_l5k38"]
 [ext_resource type="Texture2D" uid="uid://c8dgxj1yxyiko" path="res://assets/monsters/td_monsters_goblin_grunt_d2.png" id="2_a6asr"]

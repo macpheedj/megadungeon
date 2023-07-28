@@ -92,4 +92,5 @@ func _ready():
 
 
 func _on_turn_ended():
+    set_state(State.StandingBy)
     turn_ended.emit()
