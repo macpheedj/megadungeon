@@ -57,7 +57,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Character" instance=ExtResource("1_rgata")]
+[node name="Goblin" instance=ExtResource("1_rgata")]
 
 [node name="Sprite" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_6haet")
