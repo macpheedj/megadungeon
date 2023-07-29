@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkp71whytt1rk"]
+[gd_scene load_steps=11 format=3 uid="uid://bwvncsltfwnou"]
 
+[ext_resource type="PackedScene" uid="uid://b0uhri7ku15oc" path="res://entities/Character.tscn" id="1_ihd8d"]
 [ext_resource type="Texture2D" uid="uid://dp4kwd4ajmhgc" path="res://assets/PCs/td_monsters_fighter_d1.png" id="1_pd8ex"]
 [ext_resource type="Texture2D" uid="uid://dd1j5afwt1su0" path="res://assets/PCs/td_monsters_fighter_d2.png" id="2_o6bt2"]
 [ext_resource type="Texture2D" uid="uid://brofpskp488m3" path="res://assets/PCs/td_monsters_fighter_l1.png" id="3_6pxgf"]
@@ -8,10 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cspfh2h5rehvw" path="res://assets/PCs/td_monsters_fighter_r2.png" id="6_6uarc"]
 [ext_resource type="Texture2D" uid="uid://yr0ye6u8u770" path="res://assets/PCs/td_monsters_fighter_u1.png" id="7_il4ec"]
 [ext_resource type="Texture2D" uid="uid://bvbqkmbkuifep" path="res://assets/PCs/td_monsters_fighter_u2.png" id="8_dkoe8"]
-[ext_resource type="Script" path="res://entities/players/Fighter.gd" id="9_rjnjk"]
-[ext_resource type="PackedScene" uid="uid://dstssbu8r2maa" path="res://entities/components/ActionComponent.tscn" id="10_g6iq7"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ef24j"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_c4mxa"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -21,7 +20,7 @@ animations = [{
 "texture": ExtResource("2_o6bt2")
 }],
 "loop": true,
-"name": &"walk_down",
+"name": &"down",
 "speed": 2.0
 }, {
 "frames": [{
@@ -32,7 +31,7 @@ animations = [{
 "texture": ExtResource("4_wr1gi")
 }],
 "loop": true,
-"name": &"walk_left",
+"name": &"left",
 "speed": 2.0
 }, {
 "frames": [{
@@ -43,7 +42,7 @@ animations = [{
 "texture": ExtResource("6_6uarc")
 }],
 "loop": true,
-"name": &"walk_right",
+"name": &"right",
 "speed": 2.0
 }, {
 "frames": [{
@@ -54,16 +53,13 @@ animations = [{
 "texture": ExtResource("8_dkoe8")
 }],
 "loop": true,
-"name": &"walk_up",
+"name": &"up",
 "speed": 2.0
 }]
 
-[node name="Fighter" type="AnimatedSprite2D"]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_ef24j")
-animation = &"walk_right"
-autoplay = "walk_right"
-script = ExtResource("9_rjnjk")
+[node name="Fighter" instance=ExtResource("1_ihd8d")]
 
-[node name="ActionComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("10_g6iq7")]
-entity = NodePath("..")
+[node name="Sprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_c4mxa")
+animation = &"down"
+autoplay = "right"

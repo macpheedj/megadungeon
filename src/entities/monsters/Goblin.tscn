@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyf8et0xfuada"]
+[gd_scene load_steps=11 format=3 uid="uid://ubq4xujag20w"]
 
 [ext_resource type="Texture2D" uid="uid://dleywfvhj4nff" path="res://assets/monsters/td_monsters_goblin_grunt_d1.png" id="1_l5k38"]
+[ext_resource type="PackedScene" uid="uid://b0uhri7ku15oc" path="res://entities/Character.tscn" id="1_rgata"]
 [ext_resource type="Texture2D" uid="uid://c8dgxj1yxyiko" path="res://assets/monsters/td_monsters_goblin_grunt_d2.png" id="2_a6asr"]
 [ext_resource type="Texture2D" uid="uid://cqmonyj52wsxg" path="res://assets/monsters/td_monsters_goblin_grunt_l1.png" id="3_rbifw"]
 [ext_resource type="Texture2D" uid="uid://ck3nv7rv6dh71" path="res://assets/monsters/td_monsters_goblin_grunt_l2.png" id="4_ekcek"]
@@ -8,9 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dum1d0k4lqe3d" path="res://assets/monsters/td_monsters_goblin_grunt_r2.png" id="6_lklvy"]
 [ext_resource type="Texture2D" uid="uid://bofuvhiha5mgt" path="res://assets/monsters/td_monsters_goblin_grunt_u1.png" id="7_jqpyf"]
 [ext_resource type="Texture2D" uid="uid://dk4rle61mp18h" path="res://assets/monsters/td_monsters_goblin_grunt_u2.png" id="8_u0ki8"]
-[ext_resource type="Script" path="res://entities/monsters/Goblin.gd" id="9_er71m"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rd0ty"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_6haet"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -20,8 +20,8 @@ animations = [{
 "texture": ExtResource("2_a6asr")
 }],
 "loop": true,
-"name": &"walk_down",
-"speed": 2.0
+"name": &"down",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -31,8 +31,8 @@ animations = [{
 "texture": ExtResource("4_ekcek")
 }],
 "loop": true,
-"name": &"walk_left",
-"speed": 2.0
+"name": &"left",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -42,8 +42,8 @@ animations = [{
 "texture": ExtResource("6_lklvy")
 }],
 "loop": true,
-"name": &"walk_right",
-"speed": 2.0
+"name": &"right",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -53,13 +53,13 @@ animations = [{
 "texture": ExtResource("8_u0ki8")
 }],
 "loop": true,
-"name": &"walk_up",
-"speed": 2.0
+"name": &"up",
+"speed": 5.0
 }]
 
-[node name="Goblin" type="AnimatedSprite2D"]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_rd0ty")
-animation = &"walk_left"
-autoplay = "walk_left"
-script = ExtResource("9_er71m")
+[node name="Character" instance=ExtResource("1_rgata")]
+
+[node name="Sprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_6haet")
+animation = &"right"
+autoplay = "right"
