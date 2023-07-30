@@ -13,7 +13,7 @@ enum Type {
 }
 
 
-func on_enter(_entity: Entity):
+func on_enter(_entity: Character):
     pass
 
 

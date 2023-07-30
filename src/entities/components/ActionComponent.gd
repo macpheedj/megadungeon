@@ -2,16 +2,13 @@ extends Node
 class_name ActionComponent
 
 
-signal entity_turn_ended
-
-
 enum State {
 	Selecting,
 	Targeting,
 	Executing,
 }
 
-@export var entity: Entity
+@export var character: Character
 
 @export var action_1: Action
 @export var action_2: Action
@@ -45,7 +42,7 @@ func select_action(selected_action: Action):
 		action.action_state_changed.disconnect(_on_action_state_changed)
 
 	action = selected_action
-	action.on_enter(entity)
+	action.on_enter(character)
 	action.back_pressed.connect(_on_back_pressed)
 	action.action_completed.connect(_on_action_completed)
 	action.action_state_changed.connect(_on_action_state_changed)
@@ -65,7 +62,7 @@ func handle_selection_input():
 
 
 func _process(_delta):
-	if not entity.state == entity.State.TakingTurn:
+	if not character.state == character.State.TakingTurn:
 		return
 	
 	match state:
@@ -92,6 +89,6 @@ func _on_action_completed():
 	actions_taken += 1
 
 	if actions_taken >= action_points:
-		entity_turn_ended.emit()
+		character.turn_ended.emit()
 	else:
 		set_state(State.Selecting)

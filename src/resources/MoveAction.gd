@@ -5,7 +5,7 @@ class_name MoveAction
 enum { NORTH, SOUTH, EAST, WEST }
 
 
-var entity: Entity
+var character: Character
 var original_position: Vector2
 
 @export var size := 16
@@ -14,24 +14,24 @@ var original_position: Vector2
 @export var move_remaining := 0
 
 
-func on_enter(_entity: Entity):
+func on_enter(_character: Character):
     print("[MoveAction] on_enter")
-    print("[MoveAction %s] movespeed: %s" % [_entity.name, _entity.movespeed])
-    entity = _entity
-    max_range = _entity.movespeed
-    move_remaining = _entity.movespeed
-    original_position = entity.position
+    print("[MoveAction %s] movespeed: %s" % [_character.name, _character.movespeed])
+    character = _character
+    max_range = _character.movespeed
+    move_remaining = _character.movespeed
+    original_position = character.position
 
 
 func attempt_move(direction):
-    var old_position = entity.position
+    var old_position = character.position
 
-    if direction == NORTH: entity.position.y -= size
-    if direction == SOUTH: entity.position.y += size
-    if direction == EAST: entity.position.x += size
-    if direction == WEST: entity.position.x -= size
+    if direction == NORTH: character.position.y -= size
+    if direction == SOUTH: character.position.y += size
+    if direction == EAST: character.position.x += size
+    if direction == WEST: character.position.x -= size
 	
-    if not old_position == entity.position:
+    if not old_position == character.position:
         move_remaining -= 1
         print("spaces remaining: " + str(move_remaining))
 
@@ -48,7 +48,7 @@ func handle_targeting():
 
     if Input.is_action_just_pressed("ui_cancel"):
         if move_remaining < max_range:
-            entity.position = original_position
+            character.position = original_position
             move_remaining = max_range
         else:
             back_pressed.emit()
