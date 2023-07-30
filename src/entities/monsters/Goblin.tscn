@@ -21,7 +21,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"down",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -32,7 +32,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"left",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -43,7 +43,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"right",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -54,12 +54,12 @@ animations = [{
 }],
 "loop": true,
 "name": &"up",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [node name="Goblin" instance=ExtResource("1_rgata")]
 
 [node name="Sprite" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_6haet")
-animation = &"right"
+animation = &"down"
 autoplay = "right"
