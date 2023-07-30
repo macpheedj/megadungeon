@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bwvncsltfwnou"]
+[gd_scene load_steps=13 format=3 uid="uid://bwvncsltfwnou"]
 
 [ext_resource type="PackedScene" uid="uid://b0uhri7ku15oc" path="res://entities/Character.tscn" id="1_ihd8d"]
 [ext_resource type="Texture2D" uid="uid://dp4kwd4ajmhgc" path="res://assets/PCs/td_monsters_fighter_d1.png" id="1_pd8ex"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://yr0ye6u8u770" path="res://assets/PCs/td_monsters_fighter_u1.png" id="7_il4ec"]
 [ext_resource type="Texture2D" uid="uid://bvbqkmbkuifep" path="res://assets/PCs/td_monsters_fighter_u2.png" id="8_dkoe8"]
 [ext_resource type="PackedScene" uid="uid://dstssbu8r2maa" path="res://entities/components/ActionComponent.tscn" id="10_qsw47"]
+[ext_resource type="PackedScene" uid="uid://cofttqoj5w4q3" path="res://entities/components/AdventuringComponent.tscn" id="11_loop8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c4mxa"]
 animations = [{
@@ -67,4 +68,7 @@ animation = &"down"
 autoplay = "right"
 
 [node name="ActionComponent" parent="." index="3" node_paths=PackedStringArray("character") instance=ExtResource("10_qsw47")]
+character = NodePath("..")
+
+[node name="AdventuringComponent" parent="." index="4" node_paths=PackedStringArray("character") instance=ExtResource("11_loop8")]
 character = NodePath("..")
