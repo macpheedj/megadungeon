@@ -11,16 +11,16 @@ config_version=5
 [application]
 
 config/name="megadungeon"
-run/main_scene="res://levels/Level.tscn"
+run/main_scene="res://floors/Floor.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1280
+window/size/viewport_width=1536
 window/size/viewport_height=960
 window/stretch/mode="viewport"
-window/stretch/scale=3.0
+window/stretch/scale=4.0
 
 [filesystem]
 
