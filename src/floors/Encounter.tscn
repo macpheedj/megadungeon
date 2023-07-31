@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dhnmj61o7v04x"]
 
-[ext_resource type="Script" path="res://levels/Encounter.gd" id="1_msn6c"]
+[ext_resource type="Script" path="res://floors/Encounter.gd" id="1_msn6c"]
 
 [node name="Encounter" type="Area2D"]
 collision_layer = 4
