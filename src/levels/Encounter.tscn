@@ -1,16 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhnmj61o7v04x"]
+[gd_scene load_steps=2 format=3 uid="uid://dhnmj61o7v04x"]
 
 [ext_resource type="Script" path="res://levels/Encounter.gd" id="1_msn6c"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nh37d"]
-size = Vector2(176, 128)
 
 [node name="Encounter" type="Area2D"]
 collision_layer = 4
 script = ExtResource("1_msn6c")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_nh37d")
 debug_color = Color(1, 0, 0.129412, 0.419608)
 
 [node name="Monsters" type="Node" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://hql0sdxenar4"]
+[gd_scene load_steps=8 format=3 uid="uid://hql0sdxenar4"]
 
 [ext_resource type="Texture2D" uid="uid://co6fjakqtftao" path="res://assets/tiny_dungeon_world.png" id="1_367vf"]
 [ext_resource type="PackedScene" uid="uid://bwvncsltfwnou" path="res://entities/players/Fighter.tscn" id="2_ujxin"]
@@ -936,6 +936,9 @@ texture = ExtResource("1_367vf")
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_5rhx0")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nh37d"]
+size = Vector2(352.789, 164.06)
+
 [node name="Floor" type="TileMap"]
 y_sort_enabled = true
 texture_filter = 1
@@ -952,9 +955,14 @@ layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(458762, 327680, 10, 393226, 262144, 10, 65537, 983040, 10, 65538, 983040, 10, 65539, 983040, 10, 65540, 983040, 10, 65541, 983040, 10, 65542, 983040, 10, 65543, 983040, 10, 65544, 983040, 10, 65545, 983040, 10, 786447, 917504, 12, 917516, 917504, 12, 917522, 917504, 12, 1048591, 917504, 12)
 script = ExtResource("2_um2cm")
 
-[node name="Fighter" parent="." instance=ExtResource("2_ujxin")]
+[node name="Party" type="Node" parent="."]
+
+[node name="Fighter" parent="Party" instance=ExtResource("2_ujxin")]
 position = Vector2(168, 120)
 state = 0
+
+[node name="Camera2D" type="Camera2D" parent="Party/Fighter"]
+position_smoothing_enabled = true
 
 [node name="Encounters" type="Node" parent="."]
 
@@ -962,8 +970,9 @@ state = 0
 position = Vector2(245, 235)
 
 [node name="CollisionShape2D" parent="Encounters/Goblins" index="0"]
-position = Vector2(19, 5)
-debug_color = Color(1, 0, 0.129412, 0.419608)
+position = Vector2(19, 13)
+scale = Vector2(0.498882, 0.682678)
+shape = SubResource("RectangleShape2D_nh37d")
 
 [node name="Goblin1" parent="Encounters/Goblins/Monsters" index="0"]
 visible = false

@@ -21,3 +21,9 @@ enum State {
 @export var character_type: CharacterType
 @export var state: State
 @export var movespeed := 5
+
+
+func set_state(_state: State):
+    print("[%s] setting state to %s" % [name, State.keys()[_state]])
+    if not state == _state:
+        state = _state
