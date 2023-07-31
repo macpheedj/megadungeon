@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bepypovma4vp6"]
+
+[ext_resource type="PackedScene" uid="uid://dhnmj61o7v04x" path="res://levels/Encounter.tscn" id="1_d114k"]
+[ext_resource type="PackedScene" uid="uid://ubq4xujag20w" path="res://entities/monsters/Goblin.tscn" id="2_mw1gg"]
+
+[node name="Encounter" instance=ExtResource("1_d114k")]
+
+[node name="Goblin1" parent="Monsters" index="0" instance=ExtResource("2_mw1gg")]
+
+[node name="Goblin2" parent="Monsters" index="1" instance=ExtResource("2_mw1gg")]
+
+[node name="Goblin3" parent="Monsters" index="2" instance=ExtResource("2_mw1gg")]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
