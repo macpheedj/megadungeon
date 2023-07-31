@@ -63,3 +63,4 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_6haet")
 animation = &"down"
 autoplay = "right"
+offset = Vector2(0, -2)
