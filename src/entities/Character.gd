@@ -25,13 +25,6 @@ enum State {
 
 
 func _ready():
-    if not stats == null:
-        print("fart")
-        print(name)
-        stats.gain_level(self)
-    else:
-        print(stats)
-
     $JobComponent.setup()
 
 
