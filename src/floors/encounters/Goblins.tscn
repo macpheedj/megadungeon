@@ -1,10 +1,71 @@
-[gd_scene load_steps=4 format=3 uid="uid://bepypovma4vp6"]
+[gd_scene load_steps=8 format=3 uid="uid://bepypovma4vp6"]
 
 [ext_resource type="PackedScene" uid="uid://dhnmj61o7v04x" path="res://floors/Encounter.tscn" id="1_d114k"]
 [ext_resource type="PackedScene" uid="uid://ubq4xujag20w" path="res://entities/monsters/Goblin.tscn" id="2_mw1gg"]
+[ext_resource type="Script" path="res://resources/stats/Stats.gd" id="3_nla0t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lk8u2"]
 size = Vector2(32, 32)
+
+[sub_resource type="Resource" id="Resource_cj3ie"]
+script = ExtResource("3_nla0t")
+level = 0
+health = 0
+juice = 0
+might = 0
+piety = 0
+speed = 0
+move = 0
+health_scaling = 3
+juice_scaling = 3
+might_scaling = 3
+piety_scaling = 3
+speed_scaling = 3
+dodge = 0
+luck = 50
+blood_affinity = 50
+bile_affinity = 50
+phlegm_affinity = 50
+
+[sub_resource type="Resource" id="Resource_sm4qm"]
+script = ExtResource("3_nla0t")
+level = 0
+health = 0
+juice = 0
+might = 0
+piety = 0
+speed = 0
+move = 0
+health_scaling = 2
+juice_scaling = 2
+might_scaling = 2
+piety_scaling = 2
+speed_scaling = 2
+dodge = 0
+luck = 50
+blood_affinity = 50
+bile_affinity = 50
+phlegm_affinity = 50
+
+[sub_resource type="Resource" id="Resource_jgms0"]
+script = ExtResource("3_nla0t")
+level = 0
+health = 0
+juice = 0
+might = 0
+piety = 0
+speed = 0
+move = 0
+health_scaling = 0
+juice_scaling = 0
+might_scaling = 0
+piety_scaling = 0
+speed_scaling = 0
+dodge = 0
+luck = 50
+blood_affinity = 50
+bile_affinity = 50
+phlegm_affinity = 50
 
 [node name="Encounter" instance=ExtResource("1_d114k")]
 
@@ -12,9 +73,12 @@ size = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_lk8u2")
 
 [node name="Goblin1" parent="Monsters" index="0" instance=ExtResource("2_mw1gg")]
+stats = SubResource("Resource_cj3ie")
 
 [node name="Goblin2" parent="Monsters" index="1" instance=ExtResource("2_mw1gg")]
+stats = SubResource("Resource_sm4qm")
 
 [node name="Goblin3" parent="Monsters" index="2" instance=ExtResource("2_mw1gg")]
+stats = SubResource("Resource_jgms0")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

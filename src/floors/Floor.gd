@@ -3,6 +3,8 @@ class_name Floor
 
 
 func _ready():
+	randomize()
+
 	for child in $Encounters.get_children():
 		child.triggered.connect(_on_encounter_triggered)
 

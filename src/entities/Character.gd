@@ -20,7 +20,16 @@ enum State {
 
 @export var character_type: CharacterType
 @export var state: State
-@export var movespeed := 5
+@export var stats: Stats
+
+
+func _ready():
+    if not stats == null:
+        print("***")
+        print(name)
+        stats.gain_level()
+    else:
+        print(stats)
 
 
 func set_state(_state: State):

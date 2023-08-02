@@ -961,6 +961,7 @@ script = ExtResource("2_1i3aq")
 [node name="Fighter" parent="Party" instance=ExtResource("3_ti3rv")]
 position = Vector2(168, 120)
 state = 0
+stats = null
 
 [node name="Camera2D" type="Camera2D" parent="Party/Fighter"]
 position_smoothing_enabled = true
@@ -987,7 +988,8 @@ position = Vector2(248, 280)
 visible = false
 position = Vector2(184, 232)
 
-[node name="Combat" type="Node" parent="."]
+[node name="Combat" type="Node" parent="." node_paths=PackedStringArray("dungeon_floor")]
 script = ExtResource("5_vk8q3")
+dungeon_floor = NodePath("..")
 
 [editable path="Encounters/Goblins"]
