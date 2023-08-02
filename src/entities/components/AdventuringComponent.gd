@@ -21,15 +21,36 @@ func is_movement_blocked(direction: Direction) -> bool:
 	return character.get_node("Ray").is_colliding()
 
 
+func set_character_animation(animation: String):
+	var sprite: AnimatedSprite2D = character.get_node("Sprite")
+	var frame = sprite.get_frame()
+	var progress = sprite.get_frame_progress()
+
+	sprite.play(animation)
+	sprite.set_frame_and_progress(frame, progress)
+
+
 func attempt_move(direction: Direction):
 	if is_movement_blocked(direction):
 		return
 
 	match direction:
-		Direction.North: character.position.y -= size
-		Direction.South: character.position.y += size
-		Direction.East: character.position.x += size
-		Direction.West: character.position.x -= size
+		Direction.North:
+			set_character_animation("up")
+			character.position.y -= size
+
+		Direction.South:
+			set_character_animation("down")
+			character.position.y += size
+
+		Direction.East:
+			set_character_animation("right")
+			character.position.x += size
+
+		Direction.West:
+			set_character_animation("left")
+			character.position.x -= size
+
 
 
 func _process(_delta):
