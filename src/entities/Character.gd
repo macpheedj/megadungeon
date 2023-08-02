@@ -25,6 +25,7 @@ enum State {
 
 
 func _ready():
+    stats.set_level(4)
     $JobComponent.setup()
 
 

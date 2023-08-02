@@ -65,5 +65,5 @@ health_scaling = 3
 juice_scaling = 4
 might_scaling = 3
 piety_scaling = 3
-speed_scaling = 3
+speed_scaling = 4
 dodge = 5
