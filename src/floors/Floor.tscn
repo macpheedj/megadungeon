@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://co6fjakqtftao" path="res://assets/tiny_dungeon_world.png" id="1_nb01s"]
 [ext_resource type="Script" path="res://floors/Floor.gd" id="2_1i3aq"]
-[ext_resource type="PackedScene" uid="uid://bwvncsltfwnou" path="res://entities/players/Fighter.tscn" id="3_ti3rv"]
+[ext_resource type="PackedScene" uid="uid://bwvncsltfwnou" path="res://entities/players/Player.tscn" id="3_o7c2k"]
 [ext_resource type="PackedScene" uid="uid://bepypovma4vp6" path="res://floors/encounters/Goblins.tscn" id="4_tahdl"]
 [ext_resource type="Script" path="res://floors/Combat.gd" id="5_vk8q3"]
 
@@ -958,13 +958,11 @@ script = ExtResource("2_1i3aq")
 
 [node name="Party" type="Node" parent="."]
 
-[node name="Fighter" parent="Party" instance=ExtResource("3_ti3rv")]
-position = Vector2(168, 120)
+[node name="Player" parent="Party" instance=ExtResource("3_o7c2k")]
+position = Vector2(296, 120)
 state = 0
-stats = null
 
-[node name="Camera2D" type="Camera2D" parent="Party/Fighter"]
-position_smoothing_enabled = true
+[node name="Camera2D" type="Camera2D" parent="Party/Player"]
 
 [node name="Encounters" type="Node" parent="."]
 

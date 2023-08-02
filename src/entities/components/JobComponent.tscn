@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1jliecicxqyk"]
+
+[ext_resource type="Script" path="res://entities/components/JobComponent.gd" id="1_jwqj2"]
+
+[node name="JobComponent" type="Node"]
+script = ExtResource("1_jwqj2")

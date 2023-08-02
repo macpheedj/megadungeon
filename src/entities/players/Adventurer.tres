@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="Job" load_steps=11 format=3 uid="uid://dcqmvwxv757ke"]
+
+[ext_resource type="Script" path="res://resources/Job.gd" id="1_aefdf"]
+[ext_resource type="Texture2D" uid="uid://vgxfyw531put" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_d1.png" id="2_kt6mx"]
+[ext_resource type="Texture2D" uid="uid://caajvwdh8px43" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_d2.png" id="3_k6r4u"]
+[ext_resource type="Texture2D" uid="uid://dxgwfowv2udpl" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_l1.png" id="4_q16lw"]
+[ext_resource type="Texture2D" uid="uid://hn5rbeuhtxwk" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_l2.png" id="5_7ldoi"]
+[ext_resource type="Texture2D" uid="uid://xmpcjvfmamq8" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_r1.png" id="6_ewl5r"]
+[ext_resource type="Texture2D" uid="uid://dveh2odc0qptu" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_r2.png" id="7_r30yt"]
+[ext_resource type="Texture2D" uid="uid://d10bnvq1ujknh" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_u1.png" id="8_kjfxs"]
+[ext_resource type="Texture2D" uid="uid://3iocarqaaiqk" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_u2.png" id="9_yodm7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a5d61"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kt6mx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_k6r4u")
+}],
+"loop": true,
+"name": &"down",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_q16lw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7ldoi")
+}],
+"loop": true,
+"name": &"left",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ewl5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_r30yt")
+}],
+"loop": true,
+"name": &"right",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_kjfxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yodm7")
+}],
+"loop": true,
+"name": &"up",
+"speed": 2.0
+}]
+
+[resource]
+script = ExtResource("1_aefdf")
+job_title = "Adventurer"
+sprite_frames = SubResource("SpriteFrames_a5d61")
+health_scaling = 3
+juice_scaling = 4
+might_scaling = 3
+piety_scaling = 3
+speed_scaling = 3
+dodge = 5

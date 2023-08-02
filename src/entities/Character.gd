@@ -21,15 +21,18 @@ enum State {
 @export var character_type: CharacterType
 @export var state: State
 @export var stats: Stats
+@export var job: Job
 
 
 func _ready():
     if not stats == null:
-        print("***")
+        print("fart")
         print(name)
-        stats.gain_level()
+        stats.gain_level(self)
     else:
         print(stats)
+
+    $JobComponent.setup()
 
 
 func set_state(_state: State):
