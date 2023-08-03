@@ -6,7 +6,7 @@ signal triggered
 
 
 func _on_area_entered(area: Character):
-	if not area.character_type == area.CharacterType.Player:
+	if not area.character_type == Character.CharacterType.Player:
 		return
 	
 	triggered.emit(self)

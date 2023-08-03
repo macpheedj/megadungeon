@@ -30,7 +30,6 @@ stats = SubResource("Resource_pxcrl")
 job = ExtResource("3_880xi")
 
 [node name="Sprite" parent="." index="1"]
-animation = &""
 autoplay = "right"
 
 [node name="Ray" parent="." index="2"]

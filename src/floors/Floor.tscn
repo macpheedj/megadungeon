@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://hql0sdxenar4"]
+[gd_scene load_steps=11 format=3 uid="uid://hql0sdxenar4"]
 
 [ext_resource type="Texture2D" uid="uid://co6fjakqtftao" path="res://assets/tiny_dungeon_world.png" id="1_nb01s"]
 [ext_resource type="Script" path="res://floors/Floor.gd" id="2_1i3aq"]
@@ -937,8 +937,89 @@ texture = ExtResource("1_nb01s")
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_5rhx0")
 
+[sub_resource type="Animation" id="Animation_vvdro"]
+resource_name = "Goblins"
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Monsters/Goblin1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(200, 232), Vector2(184, 232)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Monsters/Goblin2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(248, 264), Vector2(248, 280)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Monsters/Goblin3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(296, 232), Vector2(312, 232)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Monsters/Goblin1:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Monsters/Goblin2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Monsters/Goblin3:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g8rob"]
+_data = {
+"Goblins": SubResource("Animation_vvdro")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nh37d"]
-size = Vector2(352.789, 152.341)
+size = Vector2(416.466, 140.311)
 
 [node name="Floor" type="TileMap"]
 y_sort_enabled = true
@@ -966,25 +1047,19 @@ state = 0
 
 [node name="Encounters" type="Node" parent="."]
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Encounters"]
+root_node = NodePath("../Goblins")
+libraries = {
+"": SubResource("AnimationLibrary_g8rob")
+}
+
 [node name="Goblins" parent="Encounters" instance=ExtResource("4_tahdl")]
-position = Vector2(245, 235)
+position = Vector2(408, 296)
 
 [node name="CollisionShape2D" parent="Encounters/Goblins" index="0"]
-position = Vector2(19, 17)
+position = Vector2(-159.884, -40.1063)
 scale = Vector2(0.498882, 0.682678)
 shape = SubResource("RectangleShape2D_nh37d")
-
-[node name="Goblin1" parent="Encounters/Goblins/Monsters" index="0"]
-visible = false
-position = Vector2(296, 248)
-
-[node name="Goblin2" parent="Encounters/Goblins/Monsters" index="1"]
-visible = false
-position = Vector2(248, 280)
-
-[node name="Goblin3" parent="Encounters/Goblins/Monsters" index="2"]
-visible = false
-position = Vector2(184, 232)
 
 [node name="Combat" type="Node" parent="." node_paths=PackedStringArray("dungeon_floor")]
 script = ExtResource("5_vk8q3")

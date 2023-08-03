@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0uhri7ku15oc"]
+[gd_scene load_steps=7 format=3 uid="uid://b0uhri7ku15oc"]
 
 [ext_resource type="Script" path="res://entities/Character.gd" id="1_8m1p6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00itw"]
 size = Vector2(16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8eqwr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3oln6"]
 
@@ -22,7 +24,8 @@ shape = SubResource("RectangleShape2D_00itw")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-offset = Vector2(1, -2)
+sprite_frames = SubResource("SpriteFrames_8eqwr")
+offset = Vector2(0, -2)
 
 [node name="Ray" type="RayCast2D" parent="."]
 target_position = Vector2(16, 0)

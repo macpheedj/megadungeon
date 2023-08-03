@@ -19,5 +19,4 @@ func begin_combat(encounter: Encounter):
 	
 	for monster in encounter.get_node("Monsters").get_children():
 		monster.set_state(monster.State.StandingBy)
-		monster.visible = true
 		actors.push_back(monster)
