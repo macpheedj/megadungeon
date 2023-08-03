@@ -58,6 +58,7 @@ animations = [{
 }]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_aefdf")
 job_title = "Adventurer"
 sprite_frames = SubResource("SpriteFrames_a5d61")

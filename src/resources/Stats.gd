@@ -30,22 +30,22 @@ var current_juice := 0
 
 func _set_health(value):
     var gain = value - health
-    health = value
-    current_health += gain
+    health = clamp(value, 0, 9999)
+    current_health = clamp(current_health + gain, 0, 9999)
 
 func _set_juice(value):
     var gain = value - juice
-    juice = value
-    current_juice += gain
+    juice = clamp(value, 0, 255)
+    current_juice = clamp(current_juice + gain, 0, 255)
 
 func _set_might(value):
-    might = value
+    might = clamp(value, 0, 999)
 
 func _set_piety(value):
-    piety = value
+    piety = clamp(value, 0, 999)
 
 func _set_speed(value):
-    speed = value
+    speed = clamp(value, 0, 999)
 
 
 func print_stats():

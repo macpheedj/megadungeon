@@ -13,5 +13,7 @@ func _ready():
 func _on_encounter_triggered(_encounter: Encounter):
 	print("encounter [%s] triggered!!!" % _encounter.name)
 
+	$Combat.setup(_encounter)
 	$Encounters/AnimationPlayer.play(_encounter.name)
-	$Combat.begin_combat(_encounter)
+	await $Encounters/AnimationPlayer.animation_finished
+	$Combat.begin()

@@ -58,6 +58,7 @@ animations = [{
 }]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_xskkb")
 job_title = "Goblin"
 sprite_frames = SubResource("SpriteFrames_texju")
