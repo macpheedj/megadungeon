@@ -14,4 +14,5 @@ enum Scaling { S, A, B, C, F }
 @export var speed_scaling := Scaling.F
 
 @export_category("job stats")
+@export_range(4, 6) var move :=0 # no. squares per turn
 @export_range(0, 100) var dodge := 0 # avoid phys damage

@@ -12,13 +12,13 @@ class_name Stats
 @export var might := 0: set = _set_might
 @export var piety := 0: set = _set_piety
 @export var speed := 0: set = _set_speed
-@export var move := 0
 @export_range(0, 100) var luck := 50
 
 var current_health := 0
 var current_juice := 0
 
 @export_category("job")
+@export_range(4, 6) var move := 0
 @export_range(0, 100) var dodge := 0 # avoid phys damage
 
 # reduce incoming spell damage of same type by % (?)
