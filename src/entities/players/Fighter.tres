@@ -1,0 +1,69 @@
+[gd_resource type="Resource" script_class="Job" load_steps=11 format=3 uid="uid://i1n26yx0jvj0"]
+
+[ext_resource type="Script" path="res://resources/Job.gd" id="1_1ikuu"]
+[ext_resource type="Texture2D" uid="uid://dp4kwd4ajmhgc" path="res://assets/PCs/fighter/td_monsters_fighter_d1.png" id="2_j3iaj"]
+[ext_resource type="Texture2D" uid="uid://dd1j5afwt1su0" path="res://assets/PCs/fighter/td_monsters_fighter_d2.png" id="3_vg8ih"]
+[ext_resource type="Texture2D" uid="uid://brofpskp488m3" path="res://assets/PCs/fighter/td_monsters_fighter_l1.png" id="4_4i40j"]
+[ext_resource type="Texture2D" uid="uid://dnfommmd3s7y6" path="res://assets/PCs/fighter/td_monsters_fighter_l2.png" id="5_emkyn"]
+[ext_resource type="Texture2D" uid="uid://bvwk3bli7alby" path="res://assets/PCs/fighter/td_monsters_fighter_r1.png" id="6_x77w3"]
+[ext_resource type="Texture2D" uid="uid://cspfh2h5rehvw" path="res://assets/PCs/fighter/td_monsters_fighter_r2.png" id="7_q8egp"]
+[ext_resource type="Texture2D" uid="uid://yr0ye6u8u770" path="res://assets/PCs/fighter/td_monsters_fighter_u1.png" id="8_f6m0h"]
+[ext_resource type="Texture2D" uid="uid://bvbqkmbkuifep" path="res://assets/PCs/fighter/td_monsters_fighter_u2.png" id="9_umla2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m12e6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j3iaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vg8ih")
+}],
+"loop": true,
+"name": &"down",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_4i40j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_emkyn")
+}],
+"loop": true,
+"name": &"left",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_x77w3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_q8egp")
+}],
+"loop": true,
+"name": &"right",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_f6m0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_umla2")
+}],
+"loop": true,
+"name": &"up",
+"speed": 2.0
+}]
+
+[resource]
+script = ExtResource("1_1ikuu")
+job_title = "Fighter"
+sprite_frames = SubResource("SpriteFrames_m12e6")
+health_scaling = 2
+juice_scaling = 4
+might_scaling = 2
+piety_scaling = 3
+speed_scaling = 2
+dodge = 0
