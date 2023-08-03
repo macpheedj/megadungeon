@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0uhri7ku15oc"]
+[gd_scene load_steps=6 format=3 uid="uid://b0uhri7ku15oc"]
 
 [ext_resource type="Script" path="res://entities/Character.gd" id="1_8m1p6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00itw"]
 size = Vector2(16, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3oln6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q5h6p"]
+bg_color = Color(0.870588, 0.137255, 0.137255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lu6k"]
+bg_color = Color(0.192157, 0.635294, 0.94902, 1)
 
 [node name="Character" type="Area2D"]
 script = ExtResource("1_8m1p6")
@@ -14,7 +22,40 @@ shape = SubResource("RectangleShape2D_00itw")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+offset = Vector2(1, -2)
 
 [node name="Ray" type="RayCast2D" parent="."]
 target_position = Vector2(16, 0)
 collide_with_areas = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -6.0
+offset_top = 8.0
+offset_right = 6.0
+offset_bottom = 9.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_3oln6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_q5h6p")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="JuiceBar" type="ProgressBar" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -6.0
+offset_top = 9.0
+offset_right = 6.0
+offset_bottom = 10.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_3oln6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1lu6k")
+step = 1.0
+value = 100.0
+show_percentage = false

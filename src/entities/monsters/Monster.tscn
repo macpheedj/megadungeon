@@ -30,7 +30,6 @@ job = ExtResource("3_jn1x3")
 [node name="Sprite" parent="." index="1"]
 animation = &""
 autoplay = "right"
-offset = Vector2(0, -2)
 
 [node name="JobComponent" parent="." index="3" node_paths=PackedStringArray("character") instance=ExtResource("4_ehx15")]
 character = NodePath("..")
