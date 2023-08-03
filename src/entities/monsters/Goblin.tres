@@ -66,4 +66,5 @@ juice_scaling = 4
 might_scaling = 4
 piety_scaling = 4
 speed_scaling = 4
-dodge = 5
+move = 4
+dodge = 3

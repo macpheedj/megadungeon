@@ -7,8 +7,8 @@ class_name Stats
 
 @export_category("base")
 @export var level := 0
-@export var health := 0: set = _set_health
-@export var juice := 0: set = _set_juice
+@export var health := 20: set = _set_health
+@export var juice := 10: set = _set_juice
 @export var might := 0: set = _set_might
 @export var piety := 0: set = _set_piety
 @export var speed := 0: set = _set_speed
@@ -18,8 +18,8 @@ var current_health := 0
 var current_juice := 0
 
 @export_category("job")
-@export_range(4, 6) var move := 0
-@export_range(0, 100) var dodge := 0 # avoid phys damage
+@export_range(4, 6) var move := 0 # no. squares per turn
+@export_range(0, 100) var dodge := 0 # % avoid phys damage
 
 # reduce incoming spell damage of same type by % (?)
 @export_category("affinities")
@@ -46,6 +46,23 @@ func _set_piety(value):
 
 func _set_speed(value):
     speed = value
+
+
+func print_stats():
+    print("***** base stats *****")
+    print("health: %s / %s" % [str(current_health), str(health)])
+    print("juice:  %s / %s" % [str(current_juice), str(juice)])
+    print("might:  %s" % str(might))
+    print("piety:  %s" % str(piety))
+    print("speed:  %s" % str(speed))
+    print("***** job stats *****")
+    print("move:   %s" % str(move))
+    print("dodge:  %s" % str(dodge))
+    print("***** affinities *****")
+    print("blood:  %s" % str(blood_affinity))
+    print("bile:   %s" % str(bile_affinity))
+    print("phlegm: %s" % str(phlegm_affinity))
+    print()
 
 
 func scale(scaling: Job.Scaling):
@@ -76,3 +93,5 @@ func set_level(_level: int):
     
     for i in range(_level - level):
         gain_level()
+
+    print_stats()
