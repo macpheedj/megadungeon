@@ -80,7 +80,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="Resource" id="Resource_ldip1"]
+[sub_resource type="Resource" id="Resource_d7xo5"]
 resource_local_to_scene = true
 script = ExtResource("4_l0egf")
 job_title = "Goblin"
@@ -110,7 +110,7 @@ blood_affinity = 50
 bile_affinity = 50
 phlegm_affinity = 50
 
-[sub_resource type="Resource" id="Resource_7sv4f"]
+[sub_resource type="Resource" id="Resource_actw0"]
 resource_local_to_scene = true
 script = ExtResource("4_l0egf")
 job_title = "Goblin"
@@ -140,7 +140,7 @@ blood_affinity = 50
 bile_affinity = 50
 phlegm_affinity = 50
 
-[sub_resource type="Resource" id="Resource_bvwqk"]
+[sub_resource type="Resource" id="Resource_j1xgy"]
 resource_local_to_scene = true
 script = ExtResource("4_l0egf")
 job_title = "Goblin"
@@ -161,16 +161,16 @@ shape = SubResource("RectangleShape2D_lk8u2")
 [node name="Goblin1" parent="Monsters" index="0" instance=ExtResource("2_vux3y")]
 position = Vector2(200, 232)
 stats = SubResource("Resource_cj3ie")
-job = SubResource("Resource_ldip1")
+job = SubResource("Resource_d7xo5")
 
 [node name="Goblin2" parent="Monsters" index="1" instance=ExtResource("2_vux3y")]
 position = Vector2(248, 264)
 stats = SubResource("Resource_sm4qm")
-job = SubResource("Resource_7sv4f")
+job = SubResource("Resource_actw0")
 
 [node name="Goblin3" parent="Monsters" index="2" instance=ExtResource("2_vux3y")]
 position = Vector2(296, 232)
 stats = SubResource("Resource_jgms0")
-job = SubResource("Resource_bvwqk")
+job = SubResource("Resource_j1xgy")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
