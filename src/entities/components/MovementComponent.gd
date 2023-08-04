@@ -35,6 +35,7 @@ func set_character_animation(direction: Direction):
 
 	sprite.play(animation)
 	sprite.set_frame_and_progress(frame, progress)
+	character.facing = direction
 
 
 func attempt_move(direction: Direction):

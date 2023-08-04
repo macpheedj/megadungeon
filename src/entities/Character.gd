@@ -23,6 +23,9 @@ enum State {
 @export var stats: Stats
 @export var job: Job
 
+# default sprite facing == right
+@export var facing: MovementComponent.Direction = MovementComponent.Direction.East
+
 
 func _ready():
     $JobComponent.setup()

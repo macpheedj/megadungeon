@@ -2,9 +2,6 @@ extends Action
 class_name MoveAction
 
 
-enum Direction { North, South, East, West }
-
-
 var character: Character
 var original_position: Vector2
 
@@ -23,24 +20,24 @@ func on_enter(_character: Character):
 	original_position = character.position
 
 
-func is_movement_blocked(direction: Direction) -> bool:
+func is_movement_blocked(direction: MovementComponent.Direction) -> bool:
 	var positions = {
-		Direction.North: Vector2(0, -size),
-		Direction.South: Vector2(0, size),
-		Direction.East: Vector2(size, 0),
-		Direction.West: Vector2(-size, 0),
+		MovementComponent.Direction.North: Vector2(0, -size),
+		MovementComponent.Direction.South: Vector2(0, size),
+		MovementComponent.Direction.East: Vector2(size, 0),
+		MovementComponent.Direction.West: Vector2(-size, 0),
 	}
 	character.get_node("Ray").target_position = positions[direction]
 	character.get_node("Ray").force_raycast_update()
 	return character.get_node("Ray").is_colliding()
 
 
-func set_character_animation(direction: Direction):
+func set_character_animation(direction: MovementComponent.Direction):
 	var facing_directions = {
-		Direction.North: "up",
-		Direction.South: "down",
-		Direction.East: "right",
-		Direction.West: "left",
+		MovementComponent.Direction.North: "up",
+		MovementComponent.Direction.South: "down",
+		MovementComponent.Direction.East: "right",
+		MovementComponent.Direction.West: "left",
 	}
 	var animation = facing_directions[direction]
 	var sprite: AnimatedSprite2D = character.get_node("Sprite")
@@ -49,9 +46,10 @@ func set_character_animation(direction: Direction):
 
 	sprite.play(animation)
 	sprite.set_frame_and_progress(frame, progress)
+	character.facing = direction
 
 
-func attempt_move(direction: Direction):
+func attempt_move(direction: MovementComponent.Direction):
 	set_character_animation(direction)
 
 	if is_movement_blocked(direction):
@@ -59,16 +57,16 @@ func attempt_move(direction: Direction):
 		return
 
 	match direction:
-		Direction.North:
+		MovementComponent.Direction.North:
 			character.position.y -= size
 
-		Direction.South:
+		MovementComponent.Direction.South:
 			character.position.y += size
 
-		Direction.East:
+		MovementComponent.Direction.East:
 			character.position.x += size
 
-		Direction.West:
+		MovementComponent.Direction.West:
 			character.position.x -= size
 	
 	move_remaining -= 1
@@ -77,10 +75,14 @@ func attempt_move(direction: Direction):
 
 func handle_targeting():
 	if move_remaining > 0:
-		if Input.is_action_just_pressed("move_north"): attempt_move(Direction.North)
-		if Input.is_action_just_pressed("move_south"): attempt_move(Direction.South)
-		if Input.is_action_just_pressed("move_east"): attempt_move(Direction.East)
-		if Input.is_action_just_pressed("move_west"): attempt_move(Direction.West)
+		if Input.is_action_just_pressed("move_north"):
+			attempt_move(MovementComponent.Direction.North)
+		if Input.is_action_just_pressed("move_south"):
+			attempt_move(MovementComponent.Direction.South)
+		if Input.is_action_just_pressed("move_east"):
+			attempt_move(MovementComponent.Direction.East)
+		if Input.is_action_just_pressed("move_west"):
+			attempt_move(MovementComponent.Direction.West)
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		action_state_changed.emit(ActionComponent.State.Executing)

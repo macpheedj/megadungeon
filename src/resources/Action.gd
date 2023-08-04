@@ -19,3 +19,11 @@ func on_enter(_character: Character):
 
 func on_exit():
     pass
+
+
+func handle_targeting():
+    assert(false, "handle_targeting() called on action class")
+
+
+func handle_execution():
+    assert(false, "handle_execution() called on action class")

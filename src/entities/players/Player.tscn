@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://b0uhri7ku15oc" path="res://entities/Character.tscn" id="1_27bw8"]
 [ext_resource type="Script" path="res://resources/Stats.gd" id="2_2glr1"]
 [ext_resource type="Resource" uid="uid://dcqmvwxv757ke" path="res://entities/players/Adventurer.tres" id="3_880xi"]
+[ext_resource type="PackedScene" uid="uid://cofttqoj5w4q3" path="res://entities/components/MovementComponent.tscn" id="6_pjq2p"]
 [ext_resource type="PackedScene" uid="uid://dstssbu8r2maa" path="res://entities/components/ActionComponent.tscn" id="11_55cwf"]
-[ext_resource type="PackedScene" uid="uid://cofttqoj5w4q3" path="res://entities/components/AdventuringComponent.tscn" id="12_fa20e"]
 [ext_resource type="PackedScene" uid="uid://d1jliecicxqyk" path="res://entities/components/JobComponent.tscn" id="13_3cpah"]
 
 [sub_resource type="Resource" id="Resource_pxcrl"]
@@ -39,8 +39,8 @@ collision_mask = 3
 [node name="ActionComponent" parent="." index="3" node_paths=PackedStringArray("character") instance=ExtResource("11_55cwf")]
 character = NodePath("..")
 
-[node name="AdventuringComponent" parent="." index="4" node_paths=PackedStringArray("character") instance=ExtResource("12_fa20e")]
+[node name="JobComponent" parent="." index="4" node_paths=PackedStringArray("character") instance=ExtResource("13_3cpah")]
 character = NodePath("..")
 
-[node name="JobComponent" parent="." index="5" node_paths=PackedStringArray("character") instance=ExtResource("13_3cpah")]
+[node name="MovementComponent" parent="." index="5" node_paths=PackedStringArray("character") instance=ExtResource("6_pjq2p")]
 character = NodePath("..")
