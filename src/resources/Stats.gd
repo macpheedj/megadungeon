@@ -16,6 +16,7 @@ class_name Stats
 
 var current_health := 0
 var current_juice := 0
+var wait := 0
 
 @export_category("job")
 @export_range(4, 6) var move := 0 # no. squares per turn
@@ -95,3 +96,7 @@ func set_level(_level: int):
         gain_level()
 
     print_stats()
+
+
+func reset_wait():
+    wait = 1000 - speed
