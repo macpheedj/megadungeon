@@ -85,6 +85,7 @@ func _on_action_completed():
 	actions_taken += 1
 
 	if actions_taken >= action_points:
+		action = null
 		character.turn_ended.emit()
-	else:
-		set_state(State.Selecting)
+
+	set_state(State.Selecting)

@@ -19,12 +19,20 @@ const tile_size := 16
 var character: Character
 var reticle: Reticle
 var targets: Array[Area2D] = []
+var stay_execution := false
 
 
 func on_enter(_character: Character):
 	character = _character
 	setup_reticle()
 	character.get_node("RangeRay").apply_scale(Vector2(max_range, max_range))
+
+
+func cleanup():
+	stay_execution = false
+	reticle.hide_rect()
+	reticle = null
+	targets = []
 
 
 func setup_reticle():
@@ -98,6 +106,10 @@ func select_target():
 	var no_friendly_fire = func(t): return t.character_type != Character.CharacterType.Player
 	targets = reticle.get_node("Cursor").get_overlapping_areas().filter(no_friendly_fire)
 	print(targets)
+	if targets.size() == 0:
+		return
+	
+	action_state_changed.emit(ActionComponent.State.Executing)
 
 
 func handle_targeting():
@@ -114,11 +126,19 @@ func handle_targeting():
 		select_target()
 
 	if Input.is_action_just_pressed("ui_cancel"):
-		reticle.hide_rect()
-		reticle = null
-		targets = []
+		cleanup()
 		back_pressed.emit()
 
 
 func handle_execution():
-	pass
+	if stay_execution:
+		return
+
+	stay_execution = true
+
+	var damage = character.get_weapon_damage()
+	for target in targets:
+		target.take_damage(damage)
+
+	cleanup()
+	action_completed.emit()

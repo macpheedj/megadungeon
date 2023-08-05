@@ -2,6 +2,13 @@
 extends Node
 
 
+enum WinCondition {
+	None,
+	Defeat,
+	Victory,
+}
+
+
 @export var dungeon_floor: Floor
 var actors: Array[Character] = []
 
@@ -21,6 +28,7 @@ func setup(encounter: Encounter):
 
 	for character in dungeon_floor.get_node("Party").get_children() + encounter.get_node("Monsters").get_children():
 		character.set_state(Character.State.StandingBy)
+		character.turn_ended.connect(_on_turn_ended)
 		character.stats.reset_wait()
 		actors.push_back(character)
 	
@@ -42,3 +50,37 @@ func tick_initiative():
 				actor.stats.reset_wait()
 				actor.set_state(Character.State.TakingTurn)
 				break
+
+
+func check_win_condition() -> WinCondition:
+	var player_hp = actors.reduce(
+		func(accum, actor):
+			if actor.character_type == Character.CharacterType.Player:
+				return accum + actor.stats.current_health
+			else: return accum, 0)
+	var monster_hp = actors.reduce(
+		func(accum, actor):
+			if actor.character_type == Character.CharacterType.Monster:
+				return accum + actor.stats.current_health
+			else: return accum, 0)
+
+	print("player_hp = " + str(player_hp))
+	print("monster_hp = " + str(monster_hp))
+
+	if monster_hp == 0:
+		return WinCondition.Victory
+	elif player_hp == 0:
+		return WinCondition.Defeat
+	else:
+		return WinCondition.None
+
+func _on_turn_ended():
+	var wincon: WinCondition = check_win_condition()
+
+	match wincon:
+		WinCondition.None:
+			tick_initiative()
+		WinCondition.Defeat:
+			print("!!!!! defeat !!!!!")
+		WinCondition.Victory:
+			print("!!!!! victory !!!!!")
