@@ -31,6 +31,7 @@ func setup_reticle():
 	match reticle_shape:
 		ReticleShape.Rect:
 			reticle = character.get_node("Reticle") as Reticle
+			move_reticle(character.facing)
 			reticle.show_rect(Vector2(reticle_width, reticle_height))
 
 
@@ -60,7 +61,6 @@ func is_reticle_in_range(position: Vector2):
 
 
 func move_reticle(direction: MovementComponent.Direction):
-	# set_facing(direction)
 	var vector_direction = {
 		MovementComponent.Direction.North: Vector2(0, -1),
 		MovementComponent.Direction.South: Vector2(0, 1),
@@ -75,6 +75,7 @@ func move_reticle(direction: MovementComponent.Direction):
 		return
 
 	reticle.global_position = reticle_destination
+	set_facing(direction)
 
 
 func select_point():

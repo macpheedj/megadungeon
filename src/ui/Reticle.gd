@@ -11,8 +11,10 @@ func show_rect(size: Vector2):
 	$ColorRect.size = size * tile_size
 	$ColorRect.position = $ColorRect.size / -2
 	$ColorRect.visible = true
+	$AnimationPlayer.play("blink")
 
 
 func hide_rect():
 	$HitRect.disabled = true
 	$ColorRect.visible = false
+	$AnimationPlayer.stop("blink")

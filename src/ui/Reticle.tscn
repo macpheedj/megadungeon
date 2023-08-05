@@ -1,6 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://tye1fflk7vlx"]
+[gd_scene load_steps=5 format=3 uid="uid://tye1fflk7vlx"]
 
 [ext_resource type="Script" path="res://ui/Reticle.gd" id="1_j22ay"]
+
+[sub_resource type="Animation" id="Animation_ntu8a"]
+resource_name = "blink"
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(6.49801, 1, 6.06286),
+"update": 0,
+"values": [Color(0.870588, 0.137255, 0.137255, 0.419608), Color(0.870588, 0.137255, 0.137255, 0), Color(0.870588, 0.137255, 0.137255, 0.419608)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ersa"]
+_data = {
+"blink": SubResource("Animation_ntu8a")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vxdjm"]
 resource_local_to_scene = true
@@ -10,6 +32,11 @@ size = Vector2(16, 16)
 collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_j22ay")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5ersa")
+}
 
 [node name="HitRect" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vxdjm")
@@ -24,3 +51,5 @@ offset_right = 8.0
 offset_bottom = 8.0
 color = Color(0.870588, 0.137255, 0.137255, 0.419608)
 metadata/_edit_use_anchors_ = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
