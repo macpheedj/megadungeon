@@ -17,4 +17,8 @@ func show_rect(size: Vector2):
 func hide_rect():
 	$Cursor/HitRect.disabled = true
 	$Cursor/ColorRect.visible = false
-	$Cursor/AnimationPlayer.stop("blink")
+	$Cursor/AnimationPlayer.stop()
+
+	for shape in get_children():
+		if shape is Polygon2D:
+			shape.visible = false

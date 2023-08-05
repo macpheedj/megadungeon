@@ -14,11 +14,11 @@ const tile_size := 16
 @export var reticle_width: int = 1
 @export var reticle_height: int = 1
 @export var min_range: int = 1
-@export var max_range: int = 2
+@export var max_range: int = 1
 
 var character: Character
 var reticle: Reticle
-var target: Character
+var targets: Array[Area2D] = []
 
 
 func on_enter(_character: Character):
@@ -80,7 +80,6 @@ func move_reticle(direction: MovementComponent.Direction):
 	var cursor_destination = cursor.global_position + (vector_direction[direction] * tile_size)
 
 	if not is_reticle_in_range(cursor_destination):
-		print("out of range")
 		character.get_node("RangeRay").look_at(cursor.global_position)
 		return
 
@@ -95,12 +94,10 @@ func move_reticle(direction: MovementComponent.Direction):
 		set_facing(direction)
 
 
-func select_point():
-	pass
-
-
 func select_target():
-	pass
+	var no_friendly_fire = func(t): return t.character_type != Character.CharacterType.Player
+	targets = reticle.get_node("Cursor").get_overlapping_areas().filter(no_friendly_fire)
+	print(targets)
 
 
 func handle_targeting():
@@ -117,6 +114,9 @@ func handle_targeting():
 		select_target()
 
 	if Input.is_action_just_pressed("ui_cancel"):
+		reticle.hide_rect()
+		reticle = null
+		targets = []
 		back_pressed.emit()
 
 

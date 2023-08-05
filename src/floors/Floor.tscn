@@ -955,7 +955,7 @@ texture = ExtResource("1_nb01s")
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_5rhx0")
 
-[sub_resource type="Resource" id="Resource_ihak8"]
+[sub_resource type="Resource" id="Resource_6cmcv"]
 resource_local_to_scene = true
 script = ExtResource("4_n3lt3")
 character = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(296, 120),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://entities/Character.gd"),"character_type":0,"state":0,"stats":null,"job":Resource("res://entities/players/Adventurer.tres"),"facing":2,"metadata/_edit_group_":true)
@@ -1020,7 +1020,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="Resource" id="Resource_wbi6p"]
+[sub_resource type="Resource" id="Resource_brjyi"]
 resource_local_to_scene = true
 script = ExtResource("4_fl0wl")
 job_title = "Adventurer"
@@ -1224,10 +1224,11 @@ script = ExtResource("2_1i3aq")
 [node name="Player" parent="Party" instance=ExtResource("3_o7c2k")]
 position = Vector2(296, 120)
 state = 0
-stats = SubResource("Resource_ihak8")
-job = SubResource("Resource_wbi6p")
+stats = SubResource("Resource_6cmcv")
+job = SubResource("Resource_brjyi")
 
 [node name="RangeRay" parent="Party/Player" index="7"]
+visible = true
 hit_from_inside = false
 collide_with_areas = false
 
