@@ -3,8 +3,10 @@ class_name AttackAction
 
 
 enum Element { None, Blood, Bile, Phlegm }
-enum Targeting { Single, Multiple }
+enum Targeting { Single, Multiple, Self }
 enum ReticleShape { Rect }
+
+const tile_size := 16
 
 @export var element: Element = Element.None
 @export var targeting: Targeting = Targeting.Single
@@ -22,6 +24,7 @@ var target: Character
 func on_enter(_character: Character):
 	character = _character
 	setup_reticle()
+	character.get_node("RangeRay").apply_scale(Vector2(max_range, max_range))
 
 
 func setup_reticle():
@@ -48,6 +51,32 @@ func set_facing(direction: MovementComponent.Direction):
 	character.facing = direction
 
 
+func is_reticle_in_range(position: Vector2):
+	var pos_diff = position - character.position
+	var ray: RayCast2D = character.get_node("RangeRay")
+	ray.look_at(position)
+	var ray_diff = ray.to_global(ray.target_position) - character.position
+	return pos_diff.abs() - ray_diff.abs() <= Vector2(0, 0)
+
+
+func move_reticle(direction: MovementComponent.Direction):
+	# set_facing(direction)
+	var vector_direction = {
+		MovementComponent.Direction.North: Vector2(0, -1),
+		MovementComponent.Direction.South: Vector2(0, 1),
+		MovementComponent.Direction.East: Vector2(1, 0),
+		MovementComponent.Direction.West: Vector2(-1, 0),
+	}
+	var reticle_destination = reticle.global_position + (vector_direction[direction] * tile_size)
+
+	if not is_reticle_in_range(reticle_destination):
+		print("out of range")
+		character.get_node("RangeRay").look_at(reticle.global_position)
+		return
+
+	reticle.global_position = reticle_destination
+
+
 func select_point():
 	pass
 
@@ -58,13 +87,13 @@ func select_target():
 
 func handle_targeting():
 	if Input.is_action_just_pressed("move_north"):
-		set_facing(MovementComponent.Direction.North)
+		move_reticle(MovementComponent.Direction.North)
 	if Input.is_action_just_pressed("move_south"):
-		set_facing(MovementComponent.Direction.South)
+		move_reticle(MovementComponent.Direction.South)
 	if Input.is_action_just_pressed("move_east"):
-		set_facing(MovementComponent.Direction.East)
+		move_reticle(MovementComponent.Direction.East)
 	if Input.is_action_just_pressed("move_west"):
-		set_facing(MovementComponent.Direction.West)
+		move_reticle(MovementComponent.Direction.West)
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		select_target()

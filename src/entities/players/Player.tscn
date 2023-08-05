@@ -32,8 +32,8 @@ script = ExtResource("6_rahq7")
 element = 0
 targeting = 0
 reticle_shape = 0
-reticle_width = 3
-reticle_height = 2
+reticle_width = 1
+reticle_height = 1
 min_range = 1
 max_range = 1
 
@@ -42,11 +42,8 @@ state = 2
 stats = SubResource("Resource_pxcrl")
 job = ExtResource("3_880xi")
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="2"]
 autoplay = "right"
-
-[node name="Ray" parent="." index="2"]
-collision_mask = 3
 
 [node name="ActionComponent" parent="." index="3" node_paths=PackedStringArray("character") instance=ExtResource("11_55cwf")]
 character = NodePath("..")

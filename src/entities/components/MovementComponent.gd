@@ -16,9 +16,9 @@ func is_movement_blocked(direction: Direction) -> bool:
 		Direction.East: Vector2(size, 0),
 		Direction.West: Vector2(-size, 0),
 	}
-	character.get_node("Ray").target_position = positions[direction]
-	character.get_node("Ray").force_raycast_update()
-	return character.get_node("Ray").is_colliding()
+	character.get_node("MoveRay").target_position = positions[direction]
+	character.get_node("MoveRay").force_raycast_update()
+	return character.get_node("MoveRay").is_colliding()
 
 
 func set_character_animation(direction: Direction):
