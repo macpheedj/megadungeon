@@ -28,22 +28,25 @@ _data = {
 resource_local_to_scene = true
 size = Vector2(16, 16)
 
-[node name="Reticle" type="Area2D"]
-collision_layer = 8
-collision_mask = 9
+[node name="Reticle" type="Node2D"]
 script = ExtResource("1_j22ay")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Cursor" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cursor"]
 libraries = {
 "": SubResource("AnimationLibrary_5ersa")
 }
 
-[node name="HitRect" type="CollisionShape2D" parent="."]
+[node name="HitRect" type="CollisionShape2D" parent="Cursor"]
+visible = false
 shape = SubResource("RectangleShape2D_vxdjm")
 disabled = true
 debug_color = Color(0.870588, 0.137255, 0.137255, 0.419608)
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="Cursor"]
 visible = false
 offset_left = -8.0
 offset_top = -8.0
@@ -52,4 +55,14 @@ offset_bottom = 8.0
 color = Color(0.870588, 0.137255, 0.137255, 0.419608)
 metadata/_edit_use_anchors_ = true
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="Size1" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.870588, 0.137255, 0.137255, 0.262745)
+polygon = PackedVector2Array(-8, -8, -8, -24, 8, -24, 8, -8, 24, -8, 24, 8, 8, 8, 8, 24, -8, 24, -8, 8, -24, 8, -24, -8)
+
+[node name="Size2" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.870588, 0.137255, 0.137255, 0.262745)
+polygon = PackedVector2Array(-24, -24, -8, -24, -8, -40, 8, -40, 8, -24, 24, -24, 24, -8, 40, -8, 40, 8, 24, 8, 24, 24, 8, 24, 8, 40, -8, 40, -8, 24, -24, 24, -24, 8, -40, 8, -40, -8, -24, -8)
+
+[connection signal="animation_finished" from="Cursor/AnimationPlayer" to="Cursor" method="_on_animation_player_animation_finished"]
