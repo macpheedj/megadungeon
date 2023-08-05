@@ -10,14 +10,12 @@ enum State {
 
 @export var character: Character
 
-@export var action_1: Action
-@export var action_2: Action
-@export var action_3: Action
-@export var action_4: Action
-@export var action_5: Action
-@export var action_6: Action
-@export var action_7: Action
-@export var action_8: Action
+@export var move_action: MoveAction
+@export var attack_action: AttackAction
+@export var job_action: Action
+@export var item_action: Action
+@export var equip_action: Action
+@export var skip_action: Action
 
 var action: Action
 var state: State
@@ -51,14 +49,12 @@ func select_action(selected_action: Action):
 
 
 func handle_selection_input():
-	if Input.is_action_just_pressed("action_bar_1"): select_action(action_1)
-	if Input.is_action_just_pressed("action_bar_2"): select_action(action_2)
-	if Input.is_action_just_pressed("action_bar_3"): select_action(action_3)
-	if Input.is_action_just_pressed("action_bar_4"): select_action(action_4)
-	if Input.is_action_just_pressed("action_bar_5"): select_action(action_5)
-	if Input.is_action_just_pressed("action_bar_6"): select_action(action_6)
-	if Input.is_action_just_pressed("action_bar_7"): select_action(action_7)
-	if Input.is_action_just_pressed("action_bar_8"): select_action(action_8)
+	if Input.is_action_just_pressed("action_bar_1"): select_action(move_action)
+	if Input.is_action_just_pressed("action_bar_2"): select_action(attack_action)
+	if Input.is_action_just_pressed("action_bar_3"): select_action(job_action)
+	if Input.is_action_just_pressed("action_bar_4"): select_action(item_action)
+	if Input.is_action_just_pressed("action_bar_5"): select_action(equip_action)
+	if Input.is_action_just_pressed("action_bar_6"): select_action(skip_action)
 
 
 func _process(_delta):

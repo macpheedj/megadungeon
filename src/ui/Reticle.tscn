@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://tye1fflk7vlx"]
+
+[ext_resource type="Script" path="res://ui/Reticle.gd" id="1_j22ay"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxdjm"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="Reticle" type="Area2D"]
+script = ExtResource("1_j22ay")
+
+[node name="HitRect" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vxdjm")
+disabled = true
+debug_color = Color(0.870588, 0.137255, 0.137255, 0.419608)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+color = Color(0.870588, 0.137255, 0.137255, 0.419608)
+metadata/_edit_use_anchors_ = true

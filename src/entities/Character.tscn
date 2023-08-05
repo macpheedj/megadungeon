@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0uhri7ku15oc"]
+[gd_scene load_steps=8 format=3 uid="uid://b0uhri7ku15oc"]
 
 [ext_resource type="Script" path="res://entities/Character.gd" id="1_8m1p6"]
+[ext_resource type="PackedScene" uid="uid://tye1fflk7vlx" path="res://ui/Reticle.tscn" id="2_udd5u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00itw"]
 size = Vector2(16, 16)
@@ -21,6 +22,8 @@ metadata/_edit_group_ = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_00itw")
+
+[node name="Reticle" parent="." instance=ExtResource("2_udd5u")]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
