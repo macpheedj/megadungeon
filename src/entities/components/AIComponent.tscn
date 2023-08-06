@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drjgsy26yrwn6"]
+
+[ext_resource type="Script" path="res://entities/components/AIComponent.gd" id="1_vfpaj"]
+
+[node name="AIComponent" type="Node"]
+script = ExtResource("1_vfpaj")

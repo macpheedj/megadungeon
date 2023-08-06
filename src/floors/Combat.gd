@@ -13,10 +13,6 @@ enum WinCondition {
 var actors: Array[Character] = []
 
 
-func prompt_initiative():
-	pass
-
-
 func character_priority_sort(a, b):
 	if (a.stats.wait == b.stats.wait) and a.character_type == Character.CharacterType.Player:
 		return true
@@ -39,6 +35,20 @@ func begin():
 	tick_initiative()
 
 
+func get_player_positions() -> Array:
+	return dungeon_floor.get_node("Party").get_children().map(func(player): return player.global_position)
+
+
+func take_turn(actor: Character):
+	print("[%s] taking turn" % actor.name)
+	if actor.has_node("AIComponent"):
+		var ai_component = actor.get_node("AIComponent")
+		var player_positions := get_player_positions()
+		ai_component.feed_player_positions(player_positions)
+	actor.stats.reset_wait()
+	actor.set_state(Character.State.TakingTurn)
+
+
 func tick_initiative():
 	var counting_down = true
 
@@ -47,8 +57,7 @@ func tick_initiative():
 			actor.stats.wait -= 1
 			if actor.stats.wait <= 0:
 				counting_down = false
-				actor.stats.reset_wait()
-				actor.set_state(Character.State.TakingTurn)
+				take_turn(actor)
 				break
 
 
@@ -73,6 +82,7 @@ func check_win_condition() -> WinCondition:
 		return WinCondition.Defeat
 	else:
 		return WinCondition.None
+
 
 func _on_turn_ended():
 	var wincon: WinCondition = check_win_condition()

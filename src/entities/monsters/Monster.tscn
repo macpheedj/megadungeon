@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ubq4xujag20w"]
+[gd_scene load_steps=7 format=3 uid="uid://ubq4xujag20w"]
 
 [ext_resource type="PackedScene" uid="uid://b0uhri7ku15oc" path="res://entities/Character.tscn" id="1_jgo6q"]
 [ext_resource type="Script" path="res://resources/Stats.gd" id="2_87ovj"]
 [ext_resource type="Resource" uid="uid://douhqrl8kdhx0" path="res://entities/monsters/Goblin.tres" id="3_jn1x3"]
 [ext_resource type="PackedScene" uid="uid://d1jliecicxqyk" path="res://entities/components/JobComponent.tscn" id="4_ehx15"]
+[ext_resource type="PackedScene" uid="uid://drjgsy26yrwn6" path="res://entities/components/AIComponent.tscn" id="6_hyrpt"]
 
 [sub_resource type="Resource" id="Resource_ee268"]
 resource_local_to_scene = true
@@ -25,11 +26,34 @@ phlegm_affinity = 50
 
 [node name="Monster" instance=ExtResource("1_jgo6q")]
 character_type = 2
+state = 1
 stats = SubResource("Resource_ee268")
 job = ExtResource("3_jn1x3")
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="2"]
 autoplay = "right"
 
 [node name="JobComponent" parent="." index="3" node_paths=PackedStringArray("character") instance=ExtResource("4_ehx15")]
 character = NodePath("..")
+
+[node name="AIComponent" parent="." index="4" node_paths=PackedStringArray("character") instance=ExtResource("6_hyrpt")]
+character = NodePath("..")
+
+[node name="RangeRay" parent="." index="6"]
+visible = true
+
+[node name="TargetNorth" type="RayCast2D" parent="." index="9"]
+target_position = Vector2(0, -16)
+collide_with_areas = true
+
+[node name="TargetSouth" type="RayCast2D" parent="." index="10"]
+target_position = Vector2(0, 16)
+collide_with_areas = true
+
+[node name="TargetEast" type="RayCast2D" parent="." index="11"]
+target_position = Vector2(16, 0)
+collide_with_areas = true
+
+[node name="TargetWest" type="RayCast2D" parent="." index="12"]
+target_position = Vector2(-16, 0)
+collide_with_areas = true

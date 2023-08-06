@@ -29,15 +29,19 @@ func set_state(new_state: State):
 	state = new_state
 
 
+func cleanup_action():
+	action.on_exit()
+	action.back_pressed.disconnect(_on_back_pressed)
+	action.action_completed.disconnect(_on_action_completed)
+	action.action_state_changed.disconnect(_on_action_state_changed)
+
+
 func select_action(selected_action: Action):
 	if selected_action == null:
 		return
 
 	if action:
-		action.on_exit()
-		action.back_pressed.disconnect(_on_back_pressed)
-		action.action_completed.disconnect(_on_action_completed)
-		action.action_state_changed.disconnect(_on_action_state_changed)
+		cleanup_action()
 
 	action = selected_action
 	action.on_enter(character)
@@ -59,6 +63,17 @@ func handle_selection_input():
 
 func _process(_delta):
 	if not character.state == character.State.TakingTurn:
+		return
+	
+	if character.has_node("AIComponent"):
+		var ai = character.get_node("AIComponent")
+		match state:
+			State.Selecting:
+				ai.select_action()
+			State.Targeting:
+				ai.select_target()
+			State.Executing:
+				ai.execute_action()
 		return
 	
 	match state:
@@ -85,7 +100,10 @@ func _on_action_completed():
 	actions_taken += 1
 
 	if actions_taken >= action_points:
+		cleanup_action()
 		action = null
+		actions_taken = 0
+		character.set_state(Character.State.StandingBy)
 		character.turn_ended.emit()
 
 	set_state(State.Selecting)
