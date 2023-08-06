@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b0uhri7ku15oc"]
+[gd_scene load_steps=11 format=3 uid="uid://b0uhri7ku15oc"]
 
 [ext_resource type="Script" path="res://entities/Character.gd" id="1_8m1p6"]
 [ext_resource type="PackedScene" uid="uid://tye1fflk7vlx" path="res://ui/Reticle.tscn" id="2_udd5u"]
@@ -15,18 +15,6 @@ bg_color = Color(0.870588, 0.137255, 0.137255, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lu6k"]
 bg_color = Color(0.192157, 0.635294, 0.94902, 1)
-
-[sub_resource type="Animation" id="Animation_p8n0j"]
-resource_name = "attack_north"
-
-[sub_resource type="Animation" id="Animation_v2cg6"]
-resource_name = "attack_south"
-
-[sub_resource type="Animation" id="Animation_xaci3"]
-resource_name = "attack_east"
-
-[sub_resource type="Animation" id="Animation_u6yry"]
-resource_name = "attack_west"
 
 [sub_resource type="Animation" id="Animation_4nm25"]
 resource_name = "take_damage"
@@ -57,12 +45,25 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(0.870588, 0.137255, 0.137255, 0.419608), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_u6yry"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bbyjp"]
 _data = {
-"attack_east": SubResource("Animation_xaci3"),
-"attack_north": SubResource("Animation_p8n0j"),
-"attack_south": SubResource("Animation_v2cg6"),
-"attack_west": SubResource("Animation_u6yry"),
+"attack": SubResource("Animation_u6yry"),
 "take_damage": SubResource("Animation_4nm25")
 }
 

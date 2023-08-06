@@ -78,14 +78,22 @@ func attack_player_in_range():
 		character.get_node("TargetEast"),
 		character.get_node("TargetWest"),
 	]
+	var facing_by_ray = {
+		"TargetNorth": MovementComponent.Direction.North,
+		"TargetSouth": MovementComponent.Direction.South,
+		"TargetEast": MovementComponent.Direction.East,
+		"TargetWest": MovementComponent.Direction.West,
+	}
 
 	for ray in rays:
 		if ray.is_colliding() and ray.get_collider().character_type == Character.CharacterType.Player:
 			target = ray.get_collider()
+			set_character_animation(facing_by_ray[ray.name])
 			break
 
 	var damage = 5
 	target.take_damage(damage)
+	character.animate_attack()
 	finish_action()
 
 
@@ -139,12 +147,16 @@ func set_character_animation(direction: MovementComponent.Direction):
 	character.facing = direction
 
 
-func attempt_move(direction: MovementComponent.Direction) -> bool:
+func attempt_move(direction: MovementComponent.Direction, is_dry_run: bool = false) -> bool:
+	var original_facing = character.facing
 	set_character_animation(direction)
 
 	if is_movement_blocked(direction):
 		print("movement blocked")
 		return false
+	if is_dry_run:
+		set_character_animation(original_facing)
+		return true
 
 	match direction:
 		MovementComponent.Direction.North:
@@ -181,14 +193,14 @@ func get_attempt_directions(direction: MovementComponent.Direction) -> Array[Mov
 	var direction_index = directions.find(direction)
 	return [
 		directions[direction_index],
-		ring(direction_index - 1, directions),
 		ring(direction_index + 1, directions),
+		ring(direction_index - 1, directions),
 	]
 
 
 func run_at_closest_player():
 	var target_position := find_closest_player()
-	var use_closest := true
+	var use_closest := false
 
 	for i in range(character.stats.move):
 		await get_tree().create_timer(0.3).timeout

@@ -48,5 +48,18 @@ func take_damage(damage: int):
     stats.current_health = clamp(stats.current_health - damage, 0, stats.health)
 
 
-func set_basic_animations():
-    pass
+func animate_attack():
+    var distance = 4
+    var animations = {
+        MovementComponent.Direction.North: Vector2(0, -distance),
+        MovementComponent.Direction.South: Vector2(0, distance),
+        MovementComponent.Direction.East: Vector2(distance, 0),
+        MovementComponent.Direction.West: Vector2(-distance, 0),
+    }
+
+    var animation = $Animator.get_animation("attack")
+    animation.track_insert_key(0, 0.0, position)
+    animation.track_insert_key(0, 0.15, position + animations[facing])
+    animation.track_insert_key(0, 0.3, position)
+
+    $Animator.play("attack")
