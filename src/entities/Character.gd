@@ -44,4 +44,9 @@ func get_weapon_damage():
 
 func take_damage(damage: int):
     print("Ouch! [%s] just took %s damage" % [name, str(damage)])
+    $Animator.play("take_damage")
     stats.current_health = clamp(stats.current_health - damage, 0, stats.health)
+
+
+func set_basic_animations():
+    pass
