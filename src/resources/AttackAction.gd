@@ -39,7 +39,6 @@ func setup_reticle():
 	match reticle_shape:
 		ReticleShape.Rect:
 			reticle = character.get_node("Reticle") as Reticle
-			move_reticle(character.facing)
 			reticle.show_rect(Vector2(reticle_width, reticle_height))
 
 			var attack_range = Vector2(min_range, max_range)
@@ -102,7 +101,6 @@ func select_target():
 
 	var no_friendly_fire = func(t): return t.character_type != Character.CharacterType.Player
 	targets = reticle.get_node("Cursor").get_overlapping_areas().filter(no_friendly_fire)
-	print(targets)
 	if targets.size() == 0:
 		return
 	

@@ -59,12 +59,8 @@ func is_player_in_range():
 
 func select_action():
 	if is_player_in_range():
-		# attack the player
-		print("[%s] Player in range" % character.name)
 		action = AI.Attack
 	else:
-		# move toward closest player
-		print("[%s] Player not in range" % character.name)
 		action = AI.Move
 	
 	state = State.ExecutingAction
@@ -169,9 +165,7 @@ func run_at_closest_player():
 		await get_tree().create_timer(0.3).timeout
 
 		var diff = (character.global_position - target_position).abs()
-		print("[%s] diff = %s" % [character.name, diff])
 		if diff == Vector2(0, size) or diff == Vector2(size, 0):
-			print("[%s] diff too small, quitting")
 			break
 		
 		var direction_vectors = {
@@ -206,6 +200,7 @@ func execute_action():
 			await get_tree().create_timer(0.5).timeout
 			run_at_closest_player()
 
+	character.action_completed.emit()
 
 func feed_player_positions(positions: Array):
 	player_positions = positions

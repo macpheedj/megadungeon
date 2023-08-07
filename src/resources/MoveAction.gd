@@ -12,8 +12,6 @@ var original_position: Vector2
 
 
 func on_enter(_character: Character):
-	print("[MoveAction] on_enter")
-	print("[MoveAction %s] move: %s" % [_character.name, _character.stats.move])
 	character = _character
 	max_range = _character.stats.move
 	move_remaining = _character.stats.move
@@ -53,7 +51,6 @@ func attempt_move(direction: MovementComponent.Direction):
 	set_character_animation(direction)
 
 	if is_movement_blocked(direction):
-		print("movement blocked")
 		return
 
 	match direction:
@@ -70,7 +67,6 @@ func attempt_move(direction: MovementComponent.Direction):
 			character.position.x -= size
 	
 	move_remaining -= 1
-	print("spaces remaining: " + str(move_remaining))
 
 
 func handle_targeting():

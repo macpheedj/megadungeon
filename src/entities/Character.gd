@@ -2,6 +2,7 @@ extends Area2D
 class_name Character
 
 
+signal action_completed
 signal turn_ended
 
 
@@ -18,6 +19,10 @@ enum State {
 }
 
 
+var corpse: SpriteFrames = preload("res://resources/corpse.tres")
+var living_sprite: SpriteFrames
+
+
 @export var character_type: CharacterType
 @export var state: State
 @export var stats: Stats
@@ -25,6 +30,7 @@ enum State {
 
 # default sprite facing == right
 @export var facing: MovementComponent.Direction = MovementComponent.Direction.East
+@export var is_alive := true
 
 
 func _ready():
@@ -46,6 +52,30 @@ func take_damage(damage: int):
     print("Ouch! [%s] just took %s damage" % [name, str(damage)])
     $Animator.play("take_damage")
     stats.current_health = clamp(stats.current_health - damage, 0, stats.health)
+
+    if stats.current_health == 0:
+        await get_tree().create_timer(0.3).timeout
+        die()
+
+
+func die():
+    z_index = 10
+    is_alive = false
+    living_sprite = $Sprite.sprite_frames
+    $Sprite.scale = Vector2(0.75, 0.75)
+    $Sprite.position += Vector2(0, 2)
+    $Sprite.sprite_frames = corpse
+    $Collision.disabled = true
+
+
+func revive(hit_points: int = 1):
+    z_index = 20
+    is_alive = true
+    stats.current_health = hit_points
+    $Sprite.scale = Vector2(1.0, 1.0)
+    $Sprite.position -= Vector2(0, 2)
+    $Sprite.sprite_frames = living_sprite
+    $Collision.disabled = false
 
 
 func animate_attack():

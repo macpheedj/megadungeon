@@ -97,6 +97,7 @@ func _on_back_pressed():
 
 
 func _on_action_completed():
+	character.action_completed.emit()
 	actions_taken += 1
 
 	if actions_taken >= action_points:

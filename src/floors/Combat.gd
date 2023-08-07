@@ -24,6 +24,7 @@ func setup(encounter: Encounter):
 
 	for character in dungeon_floor.get_node("Party").get_children() + encounter.get_node("Monsters").get_children():
 		character.set_state(Character.State.StandingBy)
+		character.action_completed.connect(_on_action_completed)
 		character.turn_ended.connect(_on_turn_ended)
 		character.stats.reset_wait()
 		actors.push_back(character)
@@ -36,7 +37,9 @@ func begin():
 
 
 func get_player_positions() -> Array:
-	return dungeon_floor.get_node("Party").get_children().map(func(player): return player.global_position)
+	var filter_dead = func(player: Character): return player.is_alive
+	var map_positions = func(player: Character): return player.global_position
+	return dungeon_floor.get_node("Party").get_children().filter(filter_dead).map(map_positions)
 
 
 func take_turn(actor: Character):
@@ -45,7 +48,6 @@ func take_turn(actor: Character):
 		var ai_component = actor.get_node("AIComponent")
 		var player_positions := get_player_positions()
 		ai_component.feed_player_positions(player_positions)
-	actor.stats.reset_wait()
 	actor.set_state(Character.State.TakingTurn)
 
 
@@ -56,8 +58,10 @@ func tick_initiative():
 		for actor in actors:
 			actor.stats.wait -= 1
 			if actor.stats.wait <= 0:
-				counting_down = false
-				take_turn(actor)
+				actor.stats.reset_wait()
+				if actor.is_alive:
+					counting_down = false
+					take_turn(actor)
 				break
 
 
@@ -72,9 +76,6 @@ func check_win_condition() -> WinCondition:
 			if actor.character_type == Character.CharacterType.Monster:
 				return accum + actor.stats.current_health
 			else: return accum, 0)
-
-	print("player_hp = " + str(player_hp))
-	print("monster_hp = " + str(monster_hp))
 
 	if monster_hp == 0:
 		return WinCondition.Victory
@@ -93,4 +94,18 @@ func _on_turn_ended():
 		WinCondition.Defeat:
 			print("!!!!! defeat !!!!!")
 		WinCondition.Victory:
-			print("!!!!! victory !!!!!")
+			for player in dungeon_floor.get_node("Party").get_children():
+				player.set_state(Character.State.Adventuring)
+
+
+func _on_action_completed():
+	var wincon: WinCondition = check_win_condition()
+
+	match wincon:
+		WinCondition.None:
+			return
+		WinCondition.Defeat:
+			print("!!!!! defeat !!!!!")
+		WinCondition.Victory:
+			for player in dungeon_floor.get_node("Party").get_children():
+				player.set_state(Character.State.Adventuring)
