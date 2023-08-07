@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://hql0sdxenar4"]
+[gd_scene load_steps=38 format=3 uid="uid://hql0sdxenar4"]
 
 [ext_resource type="Texture2D" uid="uid://co6fjakqtftao" path="res://assets/tiny_dungeon_world.png" id="1_nb01s"]
 [ext_resource type="Script" path="res://floors/Floor.gd" id="2_1i3aq"]
@@ -23,7 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://dum1d0k4lqe3d" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_r2.png" id="20_673lb"]
 [ext_resource type="Texture2D" uid="uid://bofuvhiha5mgt" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_u1.png" id="21_47qfg"]
 [ext_resource type="Texture2D" uid="uid://dk4rle61mp18h" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_u2.png" id="22_5b6ck"]
-[ext_resource type="PackedScene" uid="uid://cdg7gtoigwjbp" path="res://floors/POIs/Door.tscn" id="24_xyem7"]
+[ext_resource type="PackedScene" uid="uid://cdg7gtoigwjbp" path="res://floors/POIs/doors/Door.tscn" id="24_xyem7"]
+[ext_resource type="PackedScene" uid="uid://bi88uhwutg6g8" path="res://floors/POIs/doors/DoorHorizontal.tscn" id="25_7dcgu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5rhx0"]
 resource_name = "tiny dungeon"
@@ -956,7 +957,7 @@ texture = ExtResource("1_nb01s")
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_5rhx0")
 
-[sub_resource type="Resource" id="Resource_ea8l0"]
+[sub_resource type="Resource" id="Resource_l4883"]
 resource_local_to_scene = true
 script = ExtResource("4_n3lt3")
 character = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(296, 120),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://entities/Character.gd"),"character_type":0,"state":0,"stats":null,"job":Resource("res://entities/players/Adventurer.tres"),"facing":2,"is_alive":true,"metadata/_edit_group_":true)
@@ -1021,7 +1022,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="Resource" id="Resource_0q48x"]
+[sub_resource type="Resource" id="Resource_wayi7"]
 resource_local_to_scene = true
 script = ExtResource("4_fl0wl")
 job_title = "Adventurer"
@@ -1228,8 +1229,8 @@ z_index = 100
 z_as_relative = true
 position = Vector2(296, 120)
 state = 0
-stats = SubResource("Resource_ea8l0")
-job = SubResource("Resource_0q48x")
+stats = SubResource("Resource_l4883")
+job = SubResource("Resource_wayi7")
 
 [node name="RangeRay" parent="Party/Player" index="7"]
 visible = true
@@ -1272,6 +1273,9 @@ dungeon_floor = NodePath("..")
 
 [node name="Door" parent="POI" instance=ExtResource("24_xyem7")]
 position = Vector2(408, 112)
+
+[node name="DoorHorizontal" parent="POI" instance=ExtResource("25_7dcgu")]
+position = Vector2(296, 128)
 
 [editable path="Party/Player"]
 [editable path="Encounters/Goblins"]
