@@ -21,6 +21,7 @@ enum State {
 
 
 var corpse: SpriteFrames = preload("res://resources/corpse.tres")
+var blood_tiles: SpriteFrames = preload("res://resources/BloodTile.tres")
 var living_sprite: SpriteFrames
 
 
@@ -63,20 +64,34 @@ func die():
     z_index = 10
     is_alive = false
     living_sprite = $Sprite.sprite_frames
-    $Sprite.scale = Vector2(0.75, 0.75)
-    $Sprite.position += Vector2(0, 2)
-    $Sprite.sprite_frames = corpse
     $Collision.disabled = true
+
+    match character_type:
+        CharacterType.Player:
+            $Sprite.scale = Vector2(0.75, 0.75)
+            $Sprite.position += Vector2(0, 2)
+            $Sprite.sprite_frames = corpse
+        
+        CharacterType.Monster:
+            $Sprite.sprite_frames = blood_tiles
+            $Sprite.play(str(randi_range(1, 5)))
 
 
 func revive(hit_points: int = 1):
     z_index = 20
     is_alive = true
     stats.current_health = hit_points
-    $Sprite.scale = Vector2(1.0, 1.0)
-    $Sprite.position -= Vector2(0, 2)
-    $Sprite.sprite_frames = living_sprite
     $Collision.disabled = false
+    $Sprite.sprite_frames = living_sprite
+
+    match character_type:
+        CharacterType.Player:
+            $Sprite.scale = Vector2(1.0, 1.0)
+            $Sprite.position -= Vector2(0, 2)
+        
+        CharacterType.Monster:
+            $Sprite.sprite_frames = blood_tiles
+            $Sprite.play(str(randi_range(1, 5)))
 
 
 func animate_attack():
