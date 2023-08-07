@@ -97,25 +97,9 @@ func attack_player_in_range():
 	finish_action()
 
 
-func find_closest_player() -> Vector2:
-	player_positions.sort_custom(func(a, b): return (character.global_position - a).abs() <= (character.global_position - b).abs())
-	return player_positions[0]
-
-
-func find_closest_side(target_position: Vector2) -> MoveAttempt:
-	var diff = (character.global_position - target_position).abs()
-	if diff == Vector2(0, 16) or diff == Vector2(16, 0): return MoveAttempt.None
-	elif diff.x == diff.y: print("[%s] COIN TOSS" % character.name); return [MoveAttempt.Vertical, MoveAttempt.Horizontal][randi_range(0, 1)] # coin toss on tie
-	elif diff.x < diff.y: return MoveAttempt.Horizontal
-	else: return MoveAttempt.Vertical
-
-
-func find_farthest_side(target_position: Vector2) -> MoveAttempt:
-	var diff = (character.global_position - target_position).abs()
-	if diff == Vector2(0, 16) or diff == Vector2(16, 0): return MoveAttempt.None
-	elif diff.x == diff.y: print("[%s] COIN TOSS" % character.name); return [MoveAttempt.Vertical, MoveAttempt.Horizontal][randi_range(0, 1)] # coin toss on tie
-	elif diff.x > diff.y: return MoveAttempt.Horizontal
-	else: return MoveAttempt.Vertical
+func find_shortest_distance(array: Array, vector: Vector2) -> Vector2:
+	array.sort_custom(func(a, b): return a.distance_to(vector) < b.distance_to(vector))
+	return array[0]
 
 
 func is_movement_blocked(direction: MovementComponent.Direction) -> bool:
@@ -147,16 +131,12 @@ func set_character_animation(direction: MovementComponent.Direction):
 	character.facing = direction
 
 
-func attempt_move(direction: MovementComponent.Direction, is_dry_run: bool = false) -> bool:
-	var original_facing = character.facing
+func attempt_move(direction: MovementComponent.Direction):
 	set_character_animation(direction)
 
 	if is_movement_blocked(direction):
-		print("movement blocked")
+		print("[%s] movement blocked direction: %s" % [character.name, MovementComponent.Direction.keys()[direction]])
 		return false
-	if is_dry_run:
-		set_character_animation(original_facing)
-		return true
 
 	match direction:
 		MovementComponent.Direction.North:
@@ -171,8 +151,6 @@ func attempt_move(direction: MovementComponent.Direction, is_dry_run: bool = fal
 		MovementComponent.Direction.West:
 			character.position.x -= size
 
-	return true
-
 
 func ring(index: int, array: Array):
 	if index < 0:
@@ -183,72 +161,37 @@ func ring(index: int, array: Array):
 		return array[index]
 
 
-func get_attempt_directions(direction: MovementComponent.Direction) -> Array[MovementComponent.Direction]:
-	var directions: Array[MovementComponent.Direction] = [
-		MovementComponent.Direction.North,
-		MovementComponent.Direction.East,
-		MovementComponent.Direction.South,
-		MovementComponent.Direction.West,
-	]
-	var direction_index = directions.find(direction)
-	return [
-		directions[direction_index],
-		ring(direction_index + 1, directions),
-		ring(direction_index - 1, directions),
-	]
-
-
 func run_at_closest_player():
-	var target_position := find_closest_player()
-	var use_closest := false
+	var target_position := find_shortest_distance(player_positions, character.global_position)
 
 	for i in range(character.stats.move):
+		print("[%s] move #%s" % [character.name, i])
 		await get_tree().create_timer(0.3).timeout
 
-		var start_diff = (character.global_position - target_position).abs()
-		var target_side = find_closest_side(target_position) if use_closest else find_farthest_side(target_position)
-		var first_attempt: MovementComponent.Direction
-
-		match target_side:
-			MoveAttempt.None:
-				print("[%s] adjacent to target, no need to move" % character.name)
-				break
-
-			MoveAttempt.Vertical:
-				if target_position.y < character.global_position.y:
-					first_attempt = MovementComponent.Direction.North
-				elif target_position.y > character.global_position.y:
-					first_attempt = MovementComponent.Direction.South
-				elif target_position.x < character.global_position.x:
-					first_attempt = MovementComponent.Direction.West
-				elif target_position.x > character.global_position.x:
-					first_attempt = MovementComponent.Direction.East
-
-			MoveAttempt.Horizontal:
-				if target_position.x < character.global_position.x:
-					first_attempt = MovementComponent.Direction.West
-				elif target_position.x > character.global_position.x:
-					first_attempt = MovementComponent.Direction.East
-				elif target_position.y < character.global_position.y:
-					first_attempt = MovementComponent.Direction.North
-				elif target_position.y > character.global_position.y:
-					first_attempt = MovementComponent.Direction.South
-
-		var attempt_directions = get_attempt_directions(first_attempt)
-
-		for j in range(attempt_directions.size()):
-			print("[%s] attempting move #%s in direction: %s" % [character.name, str(j), MovementComponent.Direction.keys()[attempt_directions[j]]])
-			var is_success = attempt_move(attempt_directions[j])
-			if is_success:
-				break
+		var diff = (character.global_position - target_position).abs()
+		print("[%s] diff = %s" % [character.name, diff])
+		if diff == Vector2(0, size) or diff == Vector2(size, 0):
+			print("[%s] diff too small, quitting")
+			break
 		
-		# if current algo doesn't give results, try another
-		var end_diff = (character.global_position - target_position).abs()
-		var assessment = end_diff < start_diff
-		if not assessment:
-			use_closest = not use_closest
+		var direction_vectors = {
+			MovementComponent.Direction.North: character.global_position + Vector2(0, -size),
+			MovementComponent.Direction.South: character.global_position + Vector2(0, size),
+			MovementComponent.Direction.East: character.global_position + Vector2(size, 0),
+			MovementComponent.Direction.West: character.global_position + Vector2(-size, 0),
+		}
 
-	
+		var moves = []
+
+		for direction in direction_vectors:
+			if not is_movement_blocked(direction):
+				moves.push_back(direction_vectors[direction])
+
+		var closest_position := find_shortest_distance(moves.map(func(move): return move), target_position)
+		var best_move_direction: MovementComponent.Direction = direction_vectors.find_key(closest_position)
+
+		attempt_move(best_move_direction)
+
 	finish_action()
 
 
