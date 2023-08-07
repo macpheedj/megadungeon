@@ -99,8 +99,9 @@ func select_target():
 	if not is_reticle_in_range(reticle.get_node("Cursor").global_position):
 		return
 
+	var players_only = func(c): return c is Character
 	var no_friendly_fire = func(t): return t.character_type != Character.CharacterType.Player
-	targets = reticle.get_node("Cursor").get_overlapping_areas().filter(no_friendly_fire)
+	targets = reticle.get_node("Cursor").get_overlapping_areas().filter(players_only).filter(no_friendly_fire)
 	if targets.size() == 0:
 		return
 	

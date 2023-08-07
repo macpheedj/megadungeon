@@ -52,8 +52,10 @@ func is_player_in_range():
 	]
 
 	for ray in rays:
-		if ray.is_colliding() and ray.get_collider().character_type == Character.CharacterType.Player:
-			return true
+		if ray.is_colliding():
+			var object = ray.get_collider()
+			if object is Character and object.character_type == Character.CharacterType.Player:
+				return true
 
 	return false
 

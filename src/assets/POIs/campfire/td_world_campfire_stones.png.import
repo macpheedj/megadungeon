@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqxpqjmnsu54g"
-path="res://.godot/imported/door_wood_h_closed.png-f011079ac13e582fa107e9789b7c8140.ctex"
+uid="uid://je2wmxe4ukke"
+path="res://.godot/imported/td_world_campfire_stones.png-c6246b6174b2fd2cbfc73ec01c3b6bb9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/POIs/door_wood_h_closed.png"
-dest_files=["res://.godot/imported/door_wood_h_closed.png-f011079ac13e582fa107e9789b7c8140.ctex"]
+source_file="res://assets/POIs/campfire/td_world_campfire_stones.png"
+dest_files=["res://.godot/imported/td_world_campfire_stones.png-c6246b6174b2fd2cbfc73ec01c3b6bb9.ctex"]
 
 [params]
 

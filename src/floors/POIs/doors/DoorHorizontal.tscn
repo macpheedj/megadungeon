@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bi88uhwutg6g8"]
 
 [ext_resource type="PackedScene" uid="uid://cdg7gtoigwjbp" path="res://floors/POIs/doors/Door.tscn" id="1_tgnc4"]
-[ext_resource type="Texture2D" uid="uid://cdle466wjl6o2" path="res://assets/POIs/door_wood_h_open.png" id="2_8qam7"]
-[ext_resource type="Texture2D" uid="uid://dqxpqjmnsu54g" path="res://assets/POIs/door_wood_h_closed.png" id="3_rqoha"]
+[ext_resource type="Texture2D" uid="uid://cdle466wjl6o2" path="res://assets/POIs/doors/door_wood_h_open.png" id="2_pa0q7"]
+[ext_resource type="Texture2D" uid="uid://dqxpqjmnsu54g" path="res://assets/POIs/doors/door_wood_h_closed.png" id="3_enkq6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owue2"]
 resource_local_to_scene = true
@@ -21,7 +21,7 @@ texture = null
 texture = null
 
 [node name="BottomOpen" parent="." index="3"]
-texture = ExtResource("2_8qam7")
+texture = ExtResource("2_pa0q7")
 
 [node name="BottomClosed" parent="." index="4"]
-texture = ExtResource("3_rqoha")
+texture = ExtResource("3_enkq6")

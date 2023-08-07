@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dr0o1epanolgv"]
+
+[ext_resource type="Script" path="res://floors/POIs/Campfire.gd" id="1_o84su"]
+[ext_resource type="Texture2D" uid="uid://dl5dkutyqjlh0" path="res://assets/POIs/campfire/td_world_campfire1.png" id="2_f4jbv"]
+[ext_resource type="Texture2D" uid="uid://iq25k8wnylv1" path="res://assets/POIs/campfire/td_world_campfire2.png" id="3_tfm1m"]
+[ext_resource type="Texture2D" uid="uid://je2wmxe4ukke" path="res://assets/POIs/campfire/td_world_campfire_stones.png" id="4_d1wfh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlaif"]
+size = Vector2(16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lqdvh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f4jbv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tfm1m")
+}],
+"loop": true,
+"name": &"lit",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_d1wfh")
+}],
+"loop": true,
+"name": &"unlit",
+"speed": 2.0
+}]
+
+[node name="Campfire" type="Area2D"]
+script = ExtResource("1_o84su")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hlaif")
+
+[node name="Fire" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_lqdvh")
+animation = &"unlit"
+autoplay = "unlit"
