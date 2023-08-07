@@ -85,13 +85,7 @@ func move_reticle(direction: MovementComponent.Direction):
 		MovementComponent.Direction.East: Vector2(1, 0),
 		MovementComponent.Direction.West: Vector2(-1, 0),
 	}
-	var cursor_destination = cursor.global_position + (vector_direction[direction] * tile_size)
-
-	if not is_reticle_in_range(cursor_destination):
-		character.get_node("RangeRay").look_at(cursor.global_position)
-		return
-
-	cursor.global_position = cursor_destination
+	cursor.global_position += (vector_direction[direction] * tile_size)
 
 	if (
 		(direction == MovementComponent.Direction.North and (cursor.global_position.y < character.global_position.y)) or
@@ -103,6 +97,9 @@ func move_reticle(direction: MovementComponent.Direction):
 
 
 func select_target():
+	if not is_reticle_in_range(reticle.get_node("Cursor").global_position):
+		return
+
 	var no_friendly_fire = func(t): return t.character_type != Character.CharacterType.Player
 	targets = reticle.get_node("Cursor").get_overlapping_areas().filter(no_friendly_fire)
 	print(targets)
@@ -110,6 +107,7 @@ func select_target():
 		return
 	
 	action_state_changed.emit(ActionComponent.State.Executing)
+	reticle.get_node("Cursor").global_position = character.global_position
 
 
 func handle_targeting():
