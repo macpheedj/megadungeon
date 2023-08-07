@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdg7gtoigwjbp"]
+
+[ext_resource type="Script" path="res://floors/POIs/Door.gd" id="1_espky"]
+[ext_resource type="Texture2D" uid="uid://bbf3aig5l85jy" path="res://assets/POIs/door_wood_v_closed_top.png" id="2_mk14s"]
+[ext_resource type="Texture2D" uid="uid://dqb3n7a25s65h" path="res://assets/POIs/door_wood_v_closed_bot.png" id="3_qdj2n"]
+[ext_resource type="Texture2D" uid="uid://bl3dtu6trk3c3" path="res://assets/POIs/door_wood_v_open_top.png" id="4_x50ws"]
+[ext_resource type="Texture2D" uid="uid://btnd25njyv0cy" path="res://assets/POIs/door_wood_v_open_bot.png" id="5_3t1vj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_djp1g"]
+size = Vector2(16, 32)
+
+[node name="Door" type="Area2D"]
+collision_layer = 3
+script = ExtResource("1_espky")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_djp1g")
+
+[node name="TopOpen" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("4_x50ws")
+
+[node name="TopClosed" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("2_mk14s")
+
+[node name="BottomOpen" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(0, 8)
+texture = ExtResource("5_3t1vj")
+
+[node name="BottomClosed" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 8)
+texture = ExtResource("3_qdj2n")

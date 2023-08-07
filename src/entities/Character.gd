@@ -2,6 +2,7 @@ extends Area2D
 class_name Character
 
 
+signal interaction_attempted
 signal action_completed
 signal turn_ended
 

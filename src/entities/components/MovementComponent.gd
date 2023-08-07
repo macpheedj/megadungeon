@@ -58,6 +58,12 @@ func attempt_move(direction: Direction):
 			character.position.x -= size
 
 
+func attempt_interaction():
+	var ray = character.get_node("MoveRay")
+
+	if ray.is_colliding and ray.get_collider() is POI:
+		character.interaction_attempted.emit(ray.get_collider())
+
 
 func _process(_delta):
 	if not character.state == character.State.Adventuring:
@@ -67,3 +73,5 @@ func _process(_delta):
 	if Input.is_action_just_pressed("move_south"): attempt_move(Direction.South)
 	if Input.is_action_just_pressed("move_east"): attempt_move(Direction.East)
 	if Input.is_action_just_pressed("move_west"): attempt_move(Direction.West)
+	
+	if Input.is_action_just_pressed("ui_accept"): attempt_interaction()
