@@ -132,6 +132,7 @@ func handle_execution():
 
 	stay_execution = true
 
+	character.animate_attack()
 	var damage = character.get_weapon_damage()
 	for target in targets:
 		target.take_damage(damage)
