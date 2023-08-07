@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://tye1fflk7vlx" path="res://ui/Reticle.tscn" id="2_udd5u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00itw"]
-size = Vector2(16, 16)
+size = Vector2(14, 14)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8eqwr"]
 
