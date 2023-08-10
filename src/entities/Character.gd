@@ -20,15 +20,14 @@ enum State {
 }
 
 
-var corpse: SpriteFrames = preload("res://resources/corpse.tres")
-var blood_tiles: SpriteFrames = preload("res://resources/BloodTile.tres")
+var corpse: SpriteFrames = preload("res://resources/sprite_frames/corpse.tres")
+var blood_tiles: SpriteFrames = preload("res://resources/sprite_frames/BloodTile.tres")
 var living_sprite: SpriteFrames
 
 
 @export var character_type: CharacterType
 @export var state: State
 @export var stats: Stats
-@export var job: Job
 
 # default sprite facing == right
 @export var facing: MovementComponent.Direction = MovementComponent.Direction.East
@@ -36,8 +35,8 @@ var living_sprite: SpriteFrames
 
 
 func _ready():
-    $JobComponent.setup()
-    stats.set_level(1)
+    if $JobComponent:
+        $JobComponent.setup()
 
 
 func set_state(_state: State):
@@ -47,15 +46,15 @@ func set_state(_state: State):
 
 
 func get_weapon_damage():
-    return 50
+    return randi_range(1, 6)
 
 
 func take_damage(damage: int):
     print("Ouch! [%s] just took %s damage" % [name, str(damage)])
     $Animator.play("take_damage")
-    stats.current_health = clamp(stats.current_health - damage, 0, stats.health)
+    stats.health = clamp(stats.health - damage, 0, stats.max_health)
 
-    if stats.current_health == 0:
+    if stats.health == 0:
         await get_tree().create_timer(0.3).timeout
         die()
 
@@ -80,7 +79,7 @@ func die():
 func revive(hit_points: int = 1):
     z_index = 20
     is_alive = true
-    stats.current_health = hit_points
+    stats.health = hit_points
     $Collision.disabled = false
     $Sprite.sprite_frames = living_sprite
 

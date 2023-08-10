@@ -97,7 +97,6 @@ func _on_back_pressed():
 
 
 func _on_action_completed():
-	character.action_completed.emit()
 	actions_taken += 1
 
 	if actions_taken >= action_points:
@@ -106,5 +105,7 @@ func _on_action_completed():
 		actions_taken = 0
 		character.set_state(Character.State.StandingBy)
 		character.turn_ended.emit()
+	else:
+		character.action_completed.emit()
 
 	set_state(State.Selecting)

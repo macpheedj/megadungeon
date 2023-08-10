@@ -38,6 +38,8 @@ func finish_action():
 		actions_taken = 0
 		character.set_state(Character.State.StandingBy)
 		character.turn_ended.emit()
+	else:
+		character.action_completed.emit()
 
 	state = State.SelectingAction
 	is_acting = false
@@ -84,12 +86,16 @@ func attack_player_in_range():
 	}
 
 	for ray in rays:
-		if ray.is_colliding() and ray.get_collider().character_type == Character.CharacterType.Player:
+		if (
+			ray.is_colliding() and 
+			ray.get_collider() is Character and 
+			ray.get_collider().character_type == Character.CharacterType.Player
+		):
 			target = ray.get_collider()
 			set_character_animation(facing_by_ray[ray.name])
 			break
 
-	var damage = 5
+	var damage = randi_range(1, 6)
 	target.take_damage(damage)
 	character.animate_attack()
 	finish_action()
@@ -203,6 +209,7 @@ func execute_action():
 			run_at_closest_player()
 
 	character.action_completed.emit()
+
 
 func feed_player_positions(positions: Array):
 	player_positions = positions

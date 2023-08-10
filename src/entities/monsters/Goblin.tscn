@@ -1,0 +1,88 @@
+[gd_scene load_steps=15 format=3 uid="uid://bonw7j4niva6k"]
+
+[ext_resource type="PackedScene" uid="uid://ubq4xujag20w" path="res://entities/monsters/Monster.tscn" id="1_h73co"]
+[ext_resource type="Script" path="res://resources/Stats.gd" id="2_vw68i"]
+[ext_resource type="Script" path="res://resources/Job.gd" id="3_10em3"]
+[ext_resource type="Texture2D" uid="uid://dleywfvhj4nff" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_d1.png" id="4_kijsr"]
+[ext_resource type="Texture2D" uid="uid://c8dgxj1yxyiko" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_d2.png" id="5_bx43v"]
+[ext_resource type="Texture2D" uid="uid://cqmonyj52wsxg" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_l1.png" id="6_6jbxq"]
+[ext_resource type="Texture2D" uid="uid://ck3nv7rv6dh71" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_l2.png" id="7_5871m"]
+[ext_resource type="Texture2D" uid="uid://bouwia0ovyv8m" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_r1.png" id="8_ctgkn"]
+[ext_resource type="Texture2D" uid="uid://dum1d0k4lqe3d" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_r2.png" id="9_10dtm"]
+[ext_resource type="Texture2D" uid="uid://bofuvhiha5mgt" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_u1.png" id="10_jwdtq"]
+[ext_resource type="Texture2D" uid="uid://dk4rle61mp18h" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_u2.png" id="11_ltkhg"]
+
+[sub_resource type="Resource" id="Resource_ucekp"]
+resource_local_to_scene = true
+script = ExtResource("2_vw68i")
+health = 10
+max_health = 10
+juice = 10
+max_juice = 10
+defense = 10
+perception = 10
+move = 5
+might = 10
+agility = 10
+intellect = 10
+piety = 10
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p44c4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_kijsr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bx43v")
+}],
+"loop": true,
+"name": &"down",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6jbxq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5871m")
+}],
+"loop": true,
+"name": &"left",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ctgkn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_10dtm")
+}],
+"loop": true,
+"name": &"right",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_jwdtq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ltkhg")
+}],
+"loop": true,
+"name": &"up",
+"speed": 2.0
+}]
+
+[sub_resource type="Resource" id="Resource_esjwn"]
+script = ExtResource("3_10em3")
+job_title = "Goblin"
+sprite_frames = SubResource("SpriteFrames_p44c4")
+health_growth = 3
+attribute_growth = 2
+
+[node name="Goblin" instance=ExtResource("1_h73co")]
+stats = SubResource("Resource_ucekp")
+
+[node name="JobComponent" parent="." index="3"]
+basic_job = SubResource("Resource_esjwn")

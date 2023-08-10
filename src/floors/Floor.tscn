@@ -1,28 +1,11 @@
-[gd_scene load_steps=40 format=3 uid="uid://hql0sdxenar4"]
+[gd_scene load_steps=20 format=3 uid="uid://hql0sdxenar4"]
 
 [ext_resource type="Texture2D" uid="uid://co6fjakqtftao" path="res://assets/tiny_dungeon_world.png" id="1_nb01s"]
 [ext_resource type="Script" path="res://floors/Floor.gd" id="2_1i3aq"]
 [ext_resource type="PackedScene" uid="uid://bwvncsltfwnou" path="res://entities/players/Player.tscn" id="3_o7c2k"]
-[ext_resource type="Script" path="res://resources/Job.gd" id="4_fl0wl"]
-[ext_resource type="Script" path="res://resources/Stats.gd" id="4_n3lt3"]
 [ext_resource type="PackedScene" uid="uid://bepypovma4vp6" path="res://floors/encounters/Goblins.tscn" id="4_tahdl"]
+[ext_resource type="Script" path="res://resources/Stats.gd" id="5_04ebb"]
 [ext_resource type="Script" path="res://floors/Combat.gd" id="5_vk8q3"]
-[ext_resource type="Texture2D" uid="uid://vgxfyw531put" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_d1.png" id="6_gl0ix"]
-[ext_resource type="Texture2D" uid="uid://caajvwdh8px43" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_d2.png" id="7_dk5be"]
-[ext_resource type="Texture2D" uid="uid://dxgwfowv2udpl" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_l1.png" id="8_tg8v4"]
-[ext_resource type="Texture2D" uid="uid://hn5rbeuhtxwk" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_l2.png" id="9_62v2v"]
-[ext_resource type="Texture2D" uid="uid://xmpcjvfmamq8" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_r1.png" id="10_mkp43"]
-[ext_resource type="Texture2D" uid="uid://dveh2odc0qptu" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_r2.png" id="11_k83qq"]
-[ext_resource type="Texture2D" uid="uid://d10bnvq1ujknh" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_u1.png" id="12_4d2eu"]
-[ext_resource type="Texture2D" uid="uid://3iocarqaaiqk" path="res://assets/PCs/adventurer/td_monsters_adventurer_m_u2.png" id="13_82xgd"]
-[ext_resource type="Texture2D" uid="uid://dleywfvhj4nff" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_d1.png" id="15_gusps"]
-[ext_resource type="Texture2D" uid="uid://c8dgxj1yxyiko" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_d2.png" id="16_etu52"]
-[ext_resource type="Texture2D" uid="uid://cqmonyj52wsxg" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_l1.png" id="17_y8xr7"]
-[ext_resource type="Texture2D" uid="uid://ck3nv7rv6dh71" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_l2.png" id="18_x0eol"]
-[ext_resource type="Texture2D" uid="uid://bouwia0ovyv8m" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_r1.png" id="19_qbghu"]
-[ext_resource type="Texture2D" uid="uid://dum1d0k4lqe3d" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_r2.png" id="20_673lb"]
-[ext_resource type="Texture2D" uid="uid://bofuvhiha5mgt" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_u1.png" id="21_47qfg"]
-[ext_resource type="Texture2D" uid="uid://dk4rle61mp18h" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_u2.png" id="22_5b6ck"]
 [ext_resource type="PackedScene" uid="uid://cdg7gtoigwjbp" path="res://floors/POIs/doors/Door.tscn" id="24_xyem7"]
 [ext_resource type="PackedScene" uid="uid://bi88uhwutg6g8" path="res://floors/POIs/doors/DoorHorizontal.tscn" id="25_7dcgu"]
 [ext_resource type="PackedScene" uid="uid://dr0o1epanolgv" path="res://floors/POIs/Campfire.tscn" id="26_3tv0h"]
@@ -959,85 +942,22 @@ texture = ExtResource("1_nb01s")
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_5rhx0")
 
-[sub_resource type="Resource" id="Resource_8m20i"]
+[sub_resource type="Resource" id="Resource_e7mit"]
 resource_local_to_scene = true
-script = ExtResource("4_n3lt3")
-character = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(296, 120),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":Resource("res://entities/Character.gd"),"character_type":0,"state":0,"stats":null,"job":Resource("res://entities/players/Adventurer.tres"),"facing":2,"is_alive":true,"metadata/_edit_group_":true)
-
-level = 0
-health = 20
+script = ExtResource("5_04ebb")
+health = 15
+max_health = 15
 juice = 10
-might = 0
-piety = 0
-speed = 0
-luck = 50
-move = 0
-dodge = 0
-blood_affinity = 50
-bile_affinity = 50
-phlegm_affinity = 50
+max_juice = 10
+defense = 10
+perception = 10
+move = 5
+might = 10
+agility = 10
+intellect = 10
+piety = 10
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_a5d61"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_gl0ix")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_dk5be")
-}],
-"loop": true,
-"name": &"down",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_tg8v4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_62v2v")
-}],
-"loop": true,
-"name": &"left",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_mkp43")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_k83qq")
-}],
-"loop": true,
-"name": &"right",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_4d2eu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_82xgd")
-}],
-"loop": true,
-"name": &"up",
-"speed": 2.0
-}]
-
-[sub_resource type="Resource" id="Resource_hf1qw"]
-resource_local_to_scene = true
-script = ExtResource("4_fl0wl")
-job_title = "Adventurer"
-sprite_frames = SubResource("SpriteFrames_a5d61")
-health_scaling = 3
-juice_scaling = 4
-might_scaling = 3
-piety_scaling = 3
-speed_scaling = 4
-move = 4
-dodge = 5
-
-[sub_resource type="Animation" id="Animation_vvdro"]
+[sub_resource type="Animation" id="Animation_6by7m"]
 resource_name = "Goblins"
 step = 1.0
 tracks/0/type = "value"
@@ -1055,31 +975,31 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Monsters/Goblin2:position")
+tracks/1/path = NodePath("Monsters/Goblin1:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(248, 264), Vector2(248, 280)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Monsters/Goblin3:position")
+tracks/2/path = NodePath("Monsters/Goblin2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(296, 232), Vector2(312, 232)]
+"values": [Vector2(248, 264), Vector2(248, 280)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Monsters/Goblin1:modulate")
+tracks/3/path = NodePath("Monsters/Goblin2:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1091,14 +1011,14 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Monsters/Goblin2:modulate")
+tracks/4/path = NodePath("Monsters/Goblin3:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(296, 232), Vector2(312, 232)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1115,97 +1035,56 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g8rob"]
 _data = {
-"Goblins": SubResource("Animation_vvdro")
+"Goblins": SubResource("Animation_6by7m")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nh37d"]
 size = Vector2(416.466, 140.311)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_texju"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("15_gusps")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_etu52")
-}],
-"loop": true,
-"name": &"down",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("17_y8xr7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_x0eol")
-}],
-"loop": true,
-"name": &"left",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("19_qbghu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_673lb")
-}],
-"loop": true,
-"name": &"right",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("21_47qfg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_5b6ck")
-}],
-"loop": true,
-"name": &"up",
-"speed": 2.0
-}]
-
-[sub_resource type="Resource" id="Resource_q3qjb"]
+[sub_resource type="Resource" id="Resource_d8hjj"]
 resource_local_to_scene = true
-script = ExtResource("4_fl0wl")
-job_title = "Goblin"
-sprite_frames = SubResource("SpriteFrames_texju")
-health_scaling = 4
-juice_scaling = 4
-might_scaling = 4
-piety_scaling = 4
-speed_scaling = 4
-move = 4
-dodge = 3
+script = ExtResource("5_04ebb")
+health = 10
+max_health = 10
+juice = 10
+max_juice = 10
+defense = 10
+perception = 10
+move = 5
+might = 10
+agility = 10
+intellect = 10
+piety = 10
 
-[sub_resource type="Resource" id="Resource_1auhd"]
+[sub_resource type="Resource" id="Resource_t1qc3"]
 resource_local_to_scene = true
-script = ExtResource("4_fl0wl")
-job_title = "Goblin"
-sprite_frames = SubResource("SpriteFrames_texju")
-health_scaling = 4
-juice_scaling = 4
-might_scaling = 4
-piety_scaling = 4
-speed_scaling = 4
-move = 4
-dodge = 3
+script = ExtResource("5_04ebb")
+health = 10
+max_health = 10
+juice = 10
+max_juice = 10
+defense = 10
+perception = 10
+move = 5
+might = 10
+agility = 10
+intellect = 10
+piety = 10
 
-[sub_resource type="Resource" id="Resource_ldlag"]
+[sub_resource type="Resource" id="Resource_dbly4"]
 resource_local_to_scene = true
-script = ExtResource("4_fl0wl")
-job_title = "Goblin"
-sprite_frames = SubResource("SpriteFrames_texju")
-health_scaling = 4
-juice_scaling = 4
-might_scaling = 4
-piety_scaling = 4
-speed_scaling = 4
-move = 4
-dodge = 3
+script = ExtResource("5_04ebb")
+health = 10
+max_health = 10
+juice = 10
+max_juice = 10
+defense = 10
+perception = 10
+move = 5
+might = 10
+agility = 10
+intellect = 10
+piety = 10
 
 [node name="Floor" type="TileMap"]
 z_as_relative = false
@@ -1230,9 +1109,7 @@ script = ExtResource("2_1i3aq")
 z_index = 100
 z_as_relative = true
 position = Vector2(296, 120)
-state = 0
-stats = SubResource("Resource_8m20i")
-job = SubResource("Resource_hf1qw")
+stats = SubResource("Resource_e7mit")
 
 [node name="RangeRay" parent="Party/Player" index="7"]
 visible = true
@@ -1258,14 +1135,20 @@ scale = Vector2(0.498882, 0.682678)
 shape = SubResource("RectangleShape2D_nh37d")
 
 [node name="Goblin1" parent="Encounters/Goblins/Monsters" index="0"]
+modulate = Color(1, 1, 1, 0)
 y_sort_enabled = true
-job = SubResource("Resource_q3qjb")
+position = Vector2(200, 232)
+stats = SubResource("Resource_d8hjj")
 
 [node name="Goblin2" parent="Encounters/Goblins/Monsters" index="1"]
-job = SubResource("Resource_1auhd")
+modulate = Color(1, 1, 1, 0)
+position = Vector2(248, 264)
+stats = SubResource("Resource_t1qc3")
 
 [node name="Goblin3" parent="Encounters/Goblins/Monsters" index="2"]
-job = SubResource("Resource_ldlag")
+modulate = Color(1, 1, 1, 0)
+position = Vector2(296, 232)
+stats = SubResource("Resource_dbly4")
 
 [node name="Combat" type="Node" parent="." node_paths=PackedStringArray("dungeon_floor")]
 script = ExtResource("5_vk8q3")

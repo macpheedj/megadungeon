@@ -1,7 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0uhri7ku15oc"]
+[gd_scene load_steps=13 format=3 uid="uid://b0uhri7ku15oc"]
 
 [ext_resource type="Script" path="res://entities/Character.gd" id="1_8m1p6"]
+[ext_resource type="Script" path="res://resources/Stats.gd" id="2_pq0ng"]
 [ext_resource type="PackedScene" uid="uid://tye1fflk7vlx" path="res://ui/Reticle.tscn" id="2_udd5u"]
+
+[sub_resource type="Resource" id="Resource_6hnuo"]
+resource_local_to_scene = true
+script = ExtResource("2_pq0ng")
+health = 10
+max_health = 10
+juice = 10
+max_juice = 10
+defense = 10
+perception = 10
+move = 5
+might = 10
+agility = 10
+intellect = 10
+piety = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00itw"]
 size = Vector2(14, 14)
@@ -71,6 +87,7 @@ _data = {
 z_index = 20
 z_as_relative = false
 script = ExtResource("1_8m1p6")
+stats = SubResource("Resource_6hnuo")
 metadata/_edit_group_ = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

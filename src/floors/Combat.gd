@@ -2,6 +2,11 @@
 extends Node
 
 
+enum Turn {
+	Fast,
+	Slow,
+	Monster,
+}
 enum WinCondition {
 	None,
 	Defeat,
@@ -9,31 +14,78 @@ enum WinCondition {
 }
 
 
+const THRESHOLD := 10
+
 @export var dungeon_floor: Floor
+
 var actors: Array[Character] = []
+var players: Array[Character] = []
+var monsters: Array[Character] = []
 
-
-func character_priority_sort(a, b):
-	if (a.stats.wait == b.stats.wait) and a.character_type == Character.CharacterType.Player:
-		return true
-	return a.stats.wait > b.stats.wait
+var turn: Turn = Turn.Fast
+var turns_to_end := 0
 
 
 func setup(encounter: Encounter):
+	monsters = []
 	actors = []
 
 	for character in dungeon_floor.get_node("Party").get_children() + encounter.get_node("Monsters").get_children():
+		if character.character_type == Character.CharacterType.Monster:
+			monsters.push_back(character)
+		
+		if character.character_type == Character.CharacterType.Player:
+			players.push_back(character)
+
 		character.set_state(Character.State.StandingBy)
 		character.action_completed.connect(_on_action_completed)
 		character.turn_ended.connect(_on_turn_ended)
-		character.stats.reset_wait()
 		actors.push_back(character)
-	
-	actors.sort_custom(character_priority_sort)
 
+
+func start_next_turn():
+	if turns_to_end > 0: turns_to_end -= 1
+	if not turns_to_end == 0:
+		print("[Combat] turns_to_end: %s" % str(turns_to_end))
+		return
+	
+	print("[Combat] starting next turn: %s" % Turn.keys()[turn])
+
+	match turn:
+		Turn.Fast:
+			turn = Turn.Monster
+			for actor in players:
+				if actor.stats.initiative >= THRESHOLD:
+					print("[%s] %s taking fast turn" % [name, actor.name])
+					turns_to_end += 1
+					take_turn(actor)
+
+		Turn.Slow:
+			turn = Turn.Fast
+			for actor in players:
+				if actor.stats.initiative < THRESHOLD:
+					print("[%s] %s taking slow turn" % [name, actor.name])
+					turns_to_end += 1
+					take_turn(actor)
+
+		Turn.Monster:
+			turn = Turn.Slow
+			for actor in monsters:
+				await get_tree().create_timer(0.1).timeout
+				print("[%s] %s taking monster turn" % [name, actor.name])
+				turns_to_end += 1
+				take_turn(actor)
+	
+	if turns_to_end == 0:
+		start_next_turn()
+	
 
 func begin():
-	tick_initiative()
+	for actor in players:
+		actor.stats.roll_initiative()
+		print("[%s] initiative: %s" % [actor.name, str(actor.stats.initiative)])
+
+	start_next_turn()
 
 
 func get_player_positions() -> Array:
@@ -51,30 +103,16 @@ func take_turn(actor: Character):
 	actor.set_state(Character.State.TakingTurn)
 
 
-func tick_initiative():
-	var counting_down = true
-
-	while counting_down:
-		for actor in actors:
-			actor.stats.wait -= 1
-			if actor.stats.wait <= 0:
-				actor.stats.reset_wait()
-				if actor.is_alive:
-					counting_down = false
-					take_turn(actor)
-				break
-
-
 func check_win_condition() -> WinCondition:
 	var player_hp = actors.reduce(
 		func(accum, actor):
 			if actor.character_type == Character.CharacterType.Player:
-				return accum + actor.stats.current_health
+				return accum + actor.stats.health
 			else: return accum, 0)
 	var monster_hp = actors.reduce(
 		func(accum, actor):
 			if actor.character_type == Character.CharacterType.Monster:
-				return accum + actor.stats.current_health
+				return accum + actor.stats.health
 			else: return accum, 0)
 
 	if monster_hp == 0:
@@ -90,10 +128,13 @@ func _on_turn_ended():
 
 	match wincon:
 		WinCondition.None:
-			tick_initiative()
+			start_next_turn()
 		WinCondition.Defeat:
 			print("!!!!! defeat !!!!!")
+			for monster in dungeon_floor.get_node("Party").get_children():
+				monster.set_state(Character.State.Adventuring)
 		WinCondition.Victory:
+			print("!!!!! victory !!!!!")
 			for player in dungeon_floor.get_node("Party").get_children():
 				player.set_state(Character.State.Adventuring)
 
@@ -106,6 +147,9 @@ func _on_action_completed():
 			return
 		WinCondition.Defeat:
 			print("!!!!! defeat !!!!!")
+			for monster in monsters:
+				monster.set_state(Character.State.StandingBy)
 		WinCondition.Victory:
-			for player in dungeon_floor.get_node("Party").get_children():
+			print("!!!!! victory !!!!!")
+			for player in players:
 				player.set_state(Character.State.Adventuring)
