@@ -1197,9 +1197,10 @@ collide_with_areas = false
 
 [node name="Camera2D" type="Camera2D" parent="Party/Player"]
 
-[node name="Player2" parent="Party" instance=ExtResource("3_o7c2k")]
+[node name="Player2" parent="Party" node_paths=PackedStringArray("following") instance=ExtResource("3_o7c2k")]
 position = Vector2(280, 120)
 stats = SubResource("Resource_bqtgr")
+following = NodePath("../Player")
 
 [node name="Encounters" type="Node" parent="."]
 

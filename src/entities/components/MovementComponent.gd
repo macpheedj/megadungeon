@@ -19,7 +19,13 @@ func is_movement_blocked(direction: Direction) -> bool:
 	}
 	character.get_node("MoveRay").target_position = positions[direction]
 	character.get_node("MoveRay").force_raycast_update()
-	return character.get_node("MoveRay").is_colliding()
+	var colliding = character.get_node("MoveRay").is_colliding()
+	if colliding:
+		var collider = character.get_node("MoveRay").get_collider()
+		if collider is Character:
+			if collider.following and collider.following == character:
+				return false
+	return colliding
 
 
 func set_character_animation(direction: Direction):
@@ -40,6 +46,8 @@ func set_character_animation(direction: Direction):
 
 
 func attempt_move(direction: Direction):
+	var previous_position = character.position
+	var previous_facing = character.facing
 	set_character_animation(direction)
 
 	if is_movement_blocked(direction):
@@ -59,6 +67,7 @@ func attempt_move(direction: Direction):
 			character.position += Vector2(-SIZE, 0)
 	
 	character.position = character.position.snapped(SNAP)
+	character.moved.emit(previous_position, previous_facing)
 
 
 func attempt_interaction():
@@ -68,8 +77,17 @@ func attempt_interaction():
 		character.interaction_attempted.emit(ray.get_collider())
 
 
+func follow(_position: Vector2, _facing: Direction):
+	print("[%s] following %s facing %s" % [character.name, character.following, Direction.keys()[_facing]])
+	character.position = _position.snapped(SNAP)
+	set_character_animation(_facing)
+
+
 func _process(_delta):
 	if not character.state == character.State.Adventuring:
+		return
+	
+	if character.following:
 		return
 
 	if Input.is_action_just_pressed("move_north"): attempt_move(Direction.North)

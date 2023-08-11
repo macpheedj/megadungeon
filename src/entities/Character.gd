@@ -5,6 +5,7 @@ class_name Character
 signal interaction_attempted
 signal action_completed
 signal turn_ended
+signal moved
 
 
 enum CharacterType {
@@ -32,13 +33,21 @@ var living_sprite: SpriteFrames
 # default sprite facing == right
 @export var facing: MovementComponent.Direction = MovementComponent.Direction.East
 @export var is_alive := true
+@export var following: Character
 
 
 func _ready():
     setup_animation_library()
 
+    if following:
+        set_following(following)
+
     if $JobComponent:
         $JobComponent.setup()
+
+
+func set_following(followee: Character):
+    followee.moved.connect(_on_followee_moved)
 
 
 func set_state(_state: State):
@@ -129,3 +138,7 @@ func animate_attack():
     animation.track_insert_key(0, 0.3, position)
     
     $Animator.play(animation_name)
+
+
+func _on_followee_moved(_position: Vector2, _facing: MovementComponent.Direction):
+    $MovementComponent.follow(_position, _facing)
