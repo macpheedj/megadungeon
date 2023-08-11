@@ -35,6 +35,8 @@ var living_sprite: SpriteFrames
 
 
 func _ready():
+    setup_animation_library()
+
     if $JobComponent:
         $JobComponent.setup()
 
@@ -99,7 +101,20 @@ func revive(hit_points: int = 1):
             $Sprite.play(str(randi_range(1, 5)))
 
 
+func setup_animation_library():
+    var animation = Animation.new()
+    animation.length = 0.3
+    animation.add_track(Animation.TYPE_VALUE)
+    animation.track_set_path(0, ".:position")
+
+    var animation_library = AnimationLibrary.new()
+    animation_library.add_animation(name, animation)
+
+    $Animator.add_animation_library("attacks", animation_library)
+
+
 func animate_attack():
+    var animation_name = "attacks/%s" % name
     var distance = 4
     var animations = {
         MovementComponent.Direction.North: Vector2(0, -distance),
@@ -107,16 +122,10 @@ func animate_attack():
         MovementComponent.Direction.East: Vector2(distance, 0),
         MovementComponent.Direction.West: Vector2(-distance, 0),
     }
+    var animation = $Animator.get_animation(animation_name)
 
-    var animation = Animation.new()
-    animation.add_track(Animation.TYPE_VALUE)
-    animation.track_set_path(0, ".:position")
     animation.track_insert_key(0, 0.0, position)
     animation.track_insert_key(0, 0.15, position + animations[facing])
     animation.track_insert_key(0, 0.3, position)
-
-    var animation_library = AnimationLibrary.new()
-    animation_library.add_animation(name, animation)
-
-    $Animator.add_animation_library("attacks", animation_library)
-    $Animator.play("attacks/%s" % name)
+    
+    $Animator.play(animation_name)
