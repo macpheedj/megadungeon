@@ -8,7 +8,10 @@ signal triggered
 var been_triggered := false
 
 
-func _on_area_entered(area: Character):
+func _on_area_entered(area: Area2D):
+	if not area is Character:
+		return
+
 	if not area.character_type == Character.CharacterType.Player:
 		return
 	
