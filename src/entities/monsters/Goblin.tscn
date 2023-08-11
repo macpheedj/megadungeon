@@ -15,17 +15,17 @@
 [sub_resource type="Resource" id="Resource_ucekp"]
 resource_local_to_scene = true
 script = ExtResource("2_vw68i")
-health = 10
-max_health = 10
+health = 8
+max_health = 8
 juice = 10
 max_juice = 10
-defense = 10
-perception = 10
+defense = 14
+perception = 14
 move = 5
-might = 10
-agility = 10
-intellect = 10
-piety = 10
+might = 8
+agility = 13
+intellect = 11
+piety = 9
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p44c4"]
 animations = [{

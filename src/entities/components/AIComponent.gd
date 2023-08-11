@@ -98,7 +98,7 @@ func attack_player_in_range():
 			break
 
 	if target:
-		var damage = randi_range(1, 6)
+		var damage = randi_range(1, 3)
 		target.take_damage(damage)
 	character.animate_attack()
 	finish_action()

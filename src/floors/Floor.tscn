@@ -951,7 +951,7 @@ texture = ExtResource("1_nb01s")
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_5rhx0")
 
-[sub_resource type="Resource" id="Resource_jv88v"]
+[sub_resource type="Resource" id="Resource_syiow"]
 resource_local_to_scene = true
 script = ExtResource("5_04ebb")
 health = 15
@@ -962,11 +962,11 @@ defense = 10
 perception = 10
 move = 5
 might = 10
-agility = 10
+agility = 0
 intellect = 10
 piety = 10
 
-[sub_resource type="Resource" id="Resource_bqtgr"]
+[sub_resource type="Resource" id="Resource_1e7t3"]
 resource_local_to_scene = true
 script = ExtResource("5_04ebb")
 health = 10
@@ -977,7 +977,7 @@ defense = 10
 perception = 10
 move = 5
 might = 10
-agility = 10
+agility = 20
 intellect = 10
 piety = 10
 
@@ -1188,7 +1188,7 @@ script = ExtResource("2_1i3aq")
 z_index = 100
 z_as_relative = true
 position = Vector2(296, 120)
-stats = SubResource("Resource_jv88v")
+stats = SubResource("Resource_syiow")
 
 [node name="RangeRay" parent="Party/Player" index="7"]
 visible = true
@@ -1199,7 +1199,7 @@ collide_with_areas = false
 
 [node name="Player2" parent="Party" node_paths=PackedStringArray("following") instance=ExtResource("3_o7c2k")]
 position = Vector2(280, 120)
-stats = SubResource("Resource_bqtgr")
+stats = SubResource("Resource_1e7t3")
 following = NodePath("../Player")
 
 [node name="Encounters" type="Node" parent="."]
