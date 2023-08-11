@@ -5,16 +5,17 @@ class_name MovementComponent
 enum Direction { North, South, East, West }
 
 
-const size := 16
+const SIZE := 16
+const SNAP := Vector2(int(SIZE / 2.0), int(SIZE / 2.0))
 @export var character: Character
 
 
 func is_movement_blocked(direction: Direction) -> bool:
 	var positions = {
-		Direction.North: Vector2(0, -size),
-		Direction.South: Vector2(0, size),
-		Direction.East: Vector2(size, 0),
-		Direction.West: Vector2(-size, 0),
+		Direction.North: Vector2(0, -SIZE),
+		Direction.South: Vector2(0, SIZE),
+		Direction.East: Vector2(SIZE, 0),
+		Direction.West: Vector2(-SIZE, 0),
 	}
 	character.get_node("MoveRay").target_position = positions[direction]
 	character.get_node("MoveRay").force_raycast_update()
@@ -46,16 +47,18 @@ func attempt_move(direction: Direction):
 
 	match direction:
 		Direction.North:
-			character.position.y -= size
+			character.position += Vector2(0, -SIZE)
 
 		Direction.South:
-			character.position.y += size
+			character.position += Vector2(0, SIZE)
 
 		Direction.East:
-			character.position.x += size
+			character.position += Vector2(SIZE, 0)
 
 		Direction.West:
-			character.position.x -= size
+			character.position += Vector2(-SIZE, 0)
+	
+	character.position = character.position.snapped(SNAP)
 
 
 func attempt_interaction():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://hql0sdxenar4"]
+[gd_scene load_steps=31 format=3 uid="uid://hql0sdxenar4"]
 
 [ext_resource type="Texture2D" uid="uid://co6fjakqtftao" path="res://assets/tiny_dungeon_world.png" id="1_nb01s"]
 [ext_resource type="Script" path="res://floors/Floor.gd" id="2_1i3aq"]
@@ -6,6 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://bepypovma4vp6" path="res://floors/encounters/Goblins.tscn" id="4_tahdl"]
 [ext_resource type="Script" path="res://resources/Stats.gd" id="5_04ebb"]
 [ext_resource type="Script" path="res://floors/Combat.gd" id="5_vk8q3"]
+[ext_resource type="Script" path="res://resources/Job.gd" id="6_vacrx"]
+[ext_resource type="Texture2D" uid="uid://dleywfvhj4nff" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_d1.png" id="7_5wjbd"]
+[ext_resource type="Texture2D" uid="uid://c8dgxj1yxyiko" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_d2.png" id="8_bwoyx"]
+[ext_resource type="Texture2D" uid="uid://cqmonyj52wsxg" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_l1.png" id="9_kmyhj"]
+[ext_resource type="Texture2D" uid="uid://ck3nv7rv6dh71" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_l2.png" id="10_qt5qu"]
+[ext_resource type="Texture2D" uid="uid://bouwia0ovyv8m" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_r1.png" id="11_ndcgo"]
+[ext_resource type="Texture2D" uid="uid://dum1d0k4lqe3d" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_r2.png" id="12_puce6"]
+[ext_resource type="Texture2D" uid="uid://bofuvhiha5mgt" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_u1.png" id="13_3i03a"]
+[ext_resource type="Texture2D" uid="uid://dk4rle61mp18h" path="res://assets/monsters/goblin/td_monsters_goblin_grunt_u2.png" id="14_ojlrt"]
 [ext_resource type="PackedScene" uid="uid://cdg7gtoigwjbp" path="res://floors/POIs/doors/Door.tscn" id="24_xyem7"]
 [ext_resource type="PackedScene" uid="uid://bi88uhwutg6g8" path="res://floors/POIs/doors/DoorHorizontal.tscn" id="25_7dcgu"]
 [ext_resource type="PackedScene" uid="uid://dr0o1epanolgv" path="res://floors/POIs/Campfire.tscn" id="26_3tv0h"]
@@ -942,7 +951,7 @@ texture = ExtResource("1_nb01s")
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_5rhx0")
 
-[sub_resource type="Resource" id="Resource_e7mit"]
+[sub_resource type="Resource" id="Resource_1jnql"]
 resource_local_to_scene = true
 script = ExtResource("5_04ebb")
 health = 15
@@ -1056,6 +1065,61 @@ agility = 10
 intellect = 10
 piety = 10
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_p44c4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_5wjbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bwoyx")
+}],
+"loop": true,
+"name": &"down",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_kmyhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qt5qu")
+}],
+"loop": true,
+"name": &"left",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ndcgo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_puce6")
+}],
+"loop": true,
+"name": &"right",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_3i03a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ojlrt")
+}],
+"loop": true,
+"name": &"up",
+"speed": 2.0
+}]
+
+[sub_resource type="Resource" id="Resource_r26jh"]
+resource_local_to_scene = true
+script = ExtResource("6_vacrx")
+job_title = "Goblin"
+sprite_frames = SubResource("SpriteFrames_p44c4")
+health_growth = 3
+attribute_growth = 2
+
 [sub_resource type="Resource" id="Resource_t1qc3"]
 resource_local_to_scene = true
 script = ExtResource("5_04ebb")
@@ -1109,7 +1173,7 @@ script = ExtResource("2_1i3aq")
 z_index = 100
 z_as_relative = true
 position = Vector2(296, 120)
-stats = SubResource("Resource_e7mit")
+stats = SubResource("Resource_1jnql")
 
 [node name="RangeRay" parent="Party/Player" index="7"]
 visible = true
@@ -1139,6 +1203,9 @@ modulate = Color(1, 1, 1, 0)
 y_sort_enabled = true
 position = Vector2(200, 232)
 stats = SubResource("Resource_d8hjj")
+
+[node name="JobComponent" parent="Encounters/Goblins/Monsters/Goblin1" index="3"]
+basic_job = SubResource("Resource_r26jh")
 
 [node name="Goblin2" parent="Encounters/Goblins/Monsters" index="1"]
 modulate = Color(1, 1, 1, 0)
@@ -1173,3 +1240,4 @@ position = Vector2(360, -40)
 
 [editable path="Party/Player"]
 [editable path="Encounters/Goblins"]
+[editable path="Encounters/Goblins/Monsters/Goblin1"]

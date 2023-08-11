@@ -18,7 +18,8 @@ enum MoveAttempt {
 }
 
 
-const size := 16
+const SIZE := 16
+const SNAP := Vector2(int(SIZE / 2.0), int(SIZE / 2.0))
 
 @export var character: Character
 
@@ -56,8 +57,9 @@ func is_player_in_range():
 	for ray in rays:
 		if ray.is_colliding():
 			var object = ray.get_collider()
-			if object is Character and object.character_type == Character.CharacterType.Player:
-				return true
+			if object is Character:
+				if object.character_type == Character.CharacterType.Player:
+					return true
 
 	return false
 
@@ -95,8 +97,9 @@ func attack_player_in_range():
 			set_character_animation(facing_by_ray[ray.name])
 			break
 
-	var damage = randi_range(1, 6)
-	target.take_damage(damage)
+	if target:
+		var damage = randi_range(1, 6)
+		target.take_damage(damage)
 	character.animate_attack()
 	finish_action()
 
@@ -108,10 +111,10 @@ func find_shortest_distance(array: Array, vector: Vector2) -> Vector2:
 
 func is_movement_blocked(direction: MovementComponent.Direction) -> bool:
 	var positions = {
-		MovementComponent.Direction.North: Vector2(0, -size),
-		MovementComponent.Direction.South: Vector2(0, size),
-		MovementComponent.Direction.East: Vector2(size, 0),
-		MovementComponent.Direction.West: Vector2(-size, 0),
+		MovementComponent.Direction.North: Vector2(0, -SIZE),
+		MovementComponent.Direction.South: Vector2(0, SIZE),
+		MovementComponent.Direction.East: Vector2(SIZE, 0),
+		MovementComponent.Direction.West: Vector2(-SIZE, 0),
 	}
 	character.get_node("MoveRay").target_position = positions[direction]
 	character.get_node("MoveRay").force_raycast_update()
@@ -144,16 +147,18 @@ func attempt_move(direction: MovementComponent.Direction):
 
 	match direction:
 		MovementComponent.Direction.North:
-			character.position.y -= size
+			character.position += Vector2(0, -SIZE).snapped(SNAP)
 
 		MovementComponent.Direction.South:
-			character.position.y += size
+			character.position += Vector2(0, SIZE).snapped(SNAP)
 
 		MovementComponent.Direction.East:
-			character.position.x += size
+			character.position += Vector2(SIZE, 0).snapped(SNAP)
 
 		MovementComponent.Direction.West:
-			character.position.x -= size
+			character.position += Vector2(-SIZE, 0).snapped(SNAP)
+	
+	character.position = character.position.snapped(SNAP)
 
 
 func ring(index: int, array: Array):
@@ -169,18 +174,17 @@ func run_at_closest_player():
 	var target_position := find_shortest_distance(player_positions, character.global_position)
 
 	for i in range(character.stats.move):
-		print("[%s] move #%s" % [character.name, i])
 		await get_tree().create_timer(0.3).timeout
 
 		var diff = (character.global_position - target_position).abs()
-		if diff == Vector2(0, size) or diff == Vector2(size, 0):
+		if diff == Vector2(0, SIZE) or diff == Vector2(SIZE, 0):
 			break
 		
 		var direction_vectors = {
-			MovementComponent.Direction.North: character.global_position + Vector2(0, -size),
-			MovementComponent.Direction.South: character.global_position + Vector2(0, size),
-			MovementComponent.Direction.East: character.global_position + Vector2(size, 0),
-			MovementComponent.Direction.West: character.global_position + Vector2(-size, 0),
+			MovementComponent.Direction.North: character.global_position + Vector2(0, -SIZE),
+			MovementComponent.Direction.South: character.global_position + Vector2(0, SIZE),
+			MovementComponent.Direction.East: character.global_position + Vector2(SIZE, 0),
+			MovementComponent.Direction.West: character.global_position + Vector2(-SIZE, 0),
 		}
 
 		var moves = []

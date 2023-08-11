@@ -60,6 +60,9 @@ func take_damage(damage: int):
 
 
 func die():
+    if not is_alive:
+        return
+
     z_index = 10
     is_alive = false
     living_sprite = $Sprite.sprite_frames
@@ -77,6 +80,9 @@ func die():
 
 
 func revive(hit_points: int = 1):
+    if is_alive:
+        return
+
     z_index = 20
     is_alive = true
     stats.health = hit_points
@@ -102,9 +108,15 @@ func animate_attack():
         MovementComponent.Direction.West: Vector2(-distance, 0),
     }
 
-    var animation = $Animator.get_animation("attack")
+    var animation = Animation.new()
+    animation.add_track(Animation.TYPE_VALUE)
+    animation.track_set_path(0, ".:position")
     animation.track_insert_key(0, 0.0, position)
     animation.track_insert_key(0, 0.15, position + animations[facing])
     animation.track_insert_key(0, 0.3, position)
 
-    $Animator.play("attack")
+    var animation_library = AnimationLibrary.new()
+    animation_library.add_animation(name, animation)
+
+    $Animator.add_animation_library("attacks", animation_library)
+    $Animator.play("attacks/%s" % name)

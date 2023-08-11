@@ -2,10 +2,12 @@ extends Action
 class_name MoveAction
 
 
+const SIZE := 16
+const SNAP := Vector2(int(SIZE / 2.0), int(SIZE / 2.0))
+
 var character: Character
 var original_position: Vector2
 
-@export var size := 16
 @export var min_range := 1
 @export var max_range := 1
 @export var move_remaining := 0
@@ -20,10 +22,10 @@ func on_enter(_character: Character):
 
 func is_movement_blocked(direction: MovementComponent.Direction) -> bool:
 	var positions = {
-		MovementComponent.Direction.North: Vector2(0, -size),
-		MovementComponent.Direction.South: Vector2(0, size),
-		MovementComponent.Direction.East: Vector2(size, 0),
-		MovementComponent.Direction.West: Vector2(-size, 0),
+		MovementComponent.Direction.North: Vector2(0, -SIZE),
+		MovementComponent.Direction.South: Vector2(0, SIZE),
+		MovementComponent.Direction.East: Vector2(SIZE, 0),
+		MovementComponent.Direction.West: Vector2(-SIZE, 0),
 	}
 	character.get_node("MoveRay").target_position = positions[direction]
 	character.get_node("MoveRay").force_raycast_update()
@@ -55,17 +57,18 @@ func attempt_move(direction: MovementComponent.Direction):
 
 	match direction:
 		MovementComponent.Direction.North:
-			character.position.y -= size
+			character.position += Vector2(0, -SIZE)
 
 		MovementComponent.Direction.South:
-			character.position.y += size
+			character.position += Vector2(0, SIZE)
 
 		MovementComponent.Direction.East:
-			character.position.x += size
+			character.position += Vector2(SIZE, 0)
 
 		MovementComponent.Direction.West:
-			character.position.x -= size
+			character.position += Vector2(-SIZE, 0)
 	
+	character.position = character.position.snapped(SNAP)
 	move_remaining -= 1
 
 

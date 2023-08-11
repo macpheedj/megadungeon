@@ -55,7 +55,7 @@ func start_next_turn():
 		Turn.Fast:
 			turn = Turn.Monster
 			for actor in players:
-				if actor.stats.initiative >= THRESHOLD:
+				if actor.is_alive and actor.stats.initiative >= THRESHOLD:
 					print("[%s] %s taking fast turn" % [name, actor.name])
 					turns_to_end += 1
 					take_turn(actor)
@@ -63,7 +63,7 @@ func start_next_turn():
 		Turn.Slow:
 			turn = Turn.Fast
 			for actor in players:
-				if actor.stats.initiative < THRESHOLD:
+				if actor.is_alive and actor.stats.initiative < THRESHOLD:
 					print("[%s] %s taking slow turn" % [name, actor.name])
 					turns_to_end += 1
 					take_turn(actor)
@@ -71,10 +71,11 @@ func start_next_turn():
 		Turn.Monster:
 			turn = Turn.Slow
 			for actor in monsters:
-				await get_tree().create_timer(0.1).timeout
-				print("[%s] %s taking monster turn" % [name, actor.name])
-				turns_to_end += 1
-				take_turn(actor)
+				if actor.is_alive:
+					await get_tree().create_timer(0.1).timeout
+					print("[%s] %s taking monster turn" % [name, actor.name])
+					turns_to_end += 1
+					take_turn(actor)
 	
 	if turns_to_end == 0:
 		start_next_turn()
@@ -123,6 +124,19 @@ func check_win_condition() -> WinCondition:
 		return WinCondition.None
 
 
+func victory():
+	print("!!!!! victory !!!!!")
+	for player in players:
+		player.set_state(Character.State.Adventuring)
+
+
+func defeat():
+	print("!!!!! defeat !!!!!")
+	for monster in monsters:
+		monster.set_state(Character.State.StandingBy)
+		monster.set_process(false)
+
+
 func _on_turn_ended():
 	var wincon: WinCondition = check_win_condition()
 
@@ -130,13 +144,9 @@ func _on_turn_ended():
 		WinCondition.None:
 			start_next_turn()
 		WinCondition.Defeat:
-			print("!!!!! defeat !!!!!")
-			for monster in dungeon_floor.get_node("Party").get_children():
-				monster.set_state(Character.State.Adventuring)
+			defeat()
 		WinCondition.Victory:
-			print("!!!!! victory !!!!!")
-			for player in dungeon_floor.get_node("Party").get_children():
-				player.set_state(Character.State.Adventuring)
+			victory()
 
 
 func _on_action_completed():
@@ -146,10 +156,6 @@ func _on_action_completed():
 		WinCondition.None:
 			return
 		WinCondition.Defeat:
-			print("!!!!! defeat !!!!!")
-			for monster in monsters:
-				monster.set_state(Character.State.StandingBy)
+			defeat()
 		WinCondition.Victory:
-			print("!!!!! victory !!!!!")
-			for player in players:
-				player.set_state(Character.State.Adventuring)
+			victory()
