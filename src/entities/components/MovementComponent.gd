@@ -78,7 +78,6 @@ func attempt_interaction():
 
 
 func follow(_position: Vector2, _facing: Direction):
-	print("[%s] following %s facing %s" % [character.name, character.following, Direction.keys()[_facing]])
 	character.position = _position.snapped(SNAP)
 	set_character_animation(_facing)
 
