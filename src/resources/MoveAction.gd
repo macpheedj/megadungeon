@@ -50,6 +50,7 @@ func set_character_animation(direction: MovementComponent.Direction):
 
 
 func attempt_move(direction: MovementComponent.Direction):
+	print("[%s] attempting move: %s" % [character.name, MovementComponent.Direction.keys()[direction]])
 	set_character_animation(direction)
 
 	if is_movement_blocked(direction):

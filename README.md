@@ -56,3 +56,34 @@
 14. blackguard
 15. gladiator
 16. magus
+
+
+## skills?
+
+* leap: jump over gaps
+* smash: break open stuck doors, break down cracked walls
+* search: spot traps, find hidden doors
+* sense: detect magic
+* sneak: move without detection
+* tinker: pick locks, disarm traps
+* repair: restore broken weapons/armor
+
+
+## jobs (alt)
+
+1. fighter -> berserker, mage knight
+2. thief -> assassin, bard
+3. wizard -> archmage, necromancer
+4. archer -> sniper, spellbow
+5. cleric -> paladin, priest
+6. druid -> moss knight, geomancer
+
+### tier 2
+
+1. berserker
+2. spellsword
+3. paladin
+4. archmage
+5. necromancer
+6. druid
+
