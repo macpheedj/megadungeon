@@ -3,7 +3,6 @@
 
 ## stats
 
-
 * **level** - level
 
 * **health** - amount of damage taken before death
@@ -77,13 +76,4 @@
 4. archer -> sniper, spellbow
 5. cleric -> paladin, priest
 6. druid -> moss knight, geomancer
-
-### tier 2
-
-1. berserker
-2. spellsword
-3. paladin
-4. archmage
-5. necromancer
-6. druid
 
